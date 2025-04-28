@@ -1,0 +1,1 @@
+# BEdynastyresort.com
