@@ -59,7 +59,7 @@ Route::get('testimonial-details/{id}',[TestimonialController::class,'Testimonial
 
 
 Route::get('get-room',[RoomController::class,'getRoom']);
-Route::get('room-details/{id}',[RoomController::class,'roomDetail']);
+Route::get('room-details/{slug}',[RoomController::class,'roomDetail']);
 
 // gallery api
 

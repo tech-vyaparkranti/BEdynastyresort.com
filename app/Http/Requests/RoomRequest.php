@@ -28,7 +28,7 @@ class RoomRequest extends FormRequest
     {
         return [
             'id'=>"bail|required_if:action,update,enable,disable|nullable|exists:rooms,id",
-            'title'=>"bail|required_if:action,update,insert|nullable|string|max:500",
+            'title'=>"bail|required_if:action,update,insert|nullable|string|max:500|unique:rooms,title",
             'features'=>"bail|nullable|string",
             'amenities'=>"bail|nullable|string",
             'banner_image'=>"bail|required_if:action,insert|nullable|image|max:2048",

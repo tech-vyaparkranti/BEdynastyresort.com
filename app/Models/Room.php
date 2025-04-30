@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
+
 
 class Room extends Model
 {
@@ -31,4 +33,15 @@ class Room extends Model
     const UPDATED_AT = "updated_at";
     const VIDEO_LINK = "video_link";
     const CATEGORY = "category";
+
+    protected static function booted()
+    {
+        static::creating(function ($room) {
+            $room->slug = Str::slug($room->title);
+        });
+
+        static::updating(function ($room) {
+            $room->slug = Str::slug($room->title);
+        });
+    }
 }

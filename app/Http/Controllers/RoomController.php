@@ -205,9 +205,9 @@ class RoomController extends Controller
         return response()->json($data, 200);
     }
 
-    public function roomDetail($id)
+    public function roomDetail($slug)
     {
-        $singleRoom = Room::where('id',$id)->first();
+        $singleRoom = Room::where('slug',$slug)->first();
         $data = [
             'status' => true,
             'success' => true,
