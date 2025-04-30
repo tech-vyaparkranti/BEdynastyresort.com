@@ -28,6 +28,7 @@ use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\VideoGalleryController;
 use App\Http\Controllers\GuestExperienceController;
 use App\Http\Controllers\OfferController;
+use App\Http\Controllers\CategoryController;
 
 
 
@@ -113,6 +114,10 @@ Route::post("guest-exp-data",[GuestExperienceController::class,"guestExpData"])-
 Route::get("manage-offer",[OfferController::class,"viewOffer"])->name("viewOffer");
 Route::post("save-offer",[OfferController::class,"saveOffer"])->name("saveOffer");
 Route::post("offer-data",[OfferController::class,"offerData"])->name("offerData");
+
+Route::get("manage-category",[CategoryController::class,"viewCategory"])->name("viewCategory");
+Route::post("save-category",[CategoryController::class,"saveCategory"])->name("saveCategory");
+Route::post("get-category",[CategoryController::class,"categoryData"])->name("categoryData");
 
 });
 

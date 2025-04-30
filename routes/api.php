@@ -16,6 +16,7 @@ use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\VideoGalleryController;
 use App\Http\Controllers\GuestExperienceController;
 use App\Http\Controllers\OfferController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -69,5 +70,9 @@ Route::get('get-video-gallery',[VideoGalleryController::class,'getVideoGallery']
 Route::get('get-guest-exp',[GuestExperienceController::class,'getGuestExp']);
 // offer api
 Route::get('get-offers-data',[OfferController::class,'offerApi']);
+
+// category api 
+
+Route::get('get-categories',[CategoryController::class,'getCategory']);
 
 

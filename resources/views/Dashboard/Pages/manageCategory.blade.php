@@ -1,25 +1,23 @@
 @extends('layouts.dashboardLayout')
-@section('title', 'Manage Video Gallery')
+@section('title', 'Manage Category')
 @section('content')
 
-    <x-dashboard-container container_header="Manage Video Gallery">
+    <x-dashboard-container container_header="Manage Category">
         <x-card>
-            <x-card-header>Add Video Gallery Items</x-card-header>
+            <x-card-header>Add Category</x-card-header>
             <x-card-body>
                 <x-form>
                     <x-input type="hidden" name="id" id="id" value=""></x-input>
                     <x-input type="hidden" name="action" id="action" value="insert"></x-input>
 
-                    <x-select-with-label id="category" name="category" label="Select Category" required="true">
-                        @if ($category)
-                        @foreach ($category as $item)
-                            <option value="{{$item->category_name}}">{{$item->category_name}}</option>                        
-                        @endforeach
-                       @endif                       
+                    <x-select-with-label id="tab_name" name="tab_name" label="Category For" required="true">
+                        <option value="Room">Room</option>
+                        <option value="Packages">Packages</option>
+                        <option value="Guest Experience">Guest Experience</option>                       
                     </x-select-with-label>
 
-                    <x-input-with-label-element type="url" name="video_link" id="video_link" placeholder=""
-                        label="You Tube Video Link"></x-input-with-label-element>
+                    <x-input-with-label-element type="text" name="category_name" id="category_name" placeholder=""
+                        label="Category Name"></x-input-with-label-element>
 
                     <x-select-label-group required name="status" id="view_status" label_text="View Status">
                         <option value="1">Visibile</option>
@@ -30,7 +28,7 @@
             </x-card-body>
         </x-card>
         <x-card>
-            <x-card-header>Video Gallery Data</x-card-header>
+            <x-card-header>Category Data</x-card-header>
             <x-card-body>
                 <x-data-table></x-data-table>
             </x-card-body>
@@ -53,7 +51,7 @@
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: "{{ route('guestExpData') }}",
+                    url: "{{ route('categoryData') }}",
                     type: 'POST',
                     data: {
                         '_token': '{{ csrf_token() }}'
@@ -76,14 +74,14 @@
                         title: "Id"
                     },
                     {
-                        data: 'category',
-                        name: 'category',
-                        title: "Category"
+                        data: 'category_name',
+                        name: 'category_name',
+                        title: "Category Name"
                     },
                     {
-                        data: 'video_link',
-                        name: 'video_link',
-                        title: "Video Link"
+                        data: 'tab_name',
+                        name: 'tab_name',
+                        title: "Category For"
                     },
                     
                     
@@ -98,8 +96,8 @@
                 $("#id").val(row['id']);
                 
                 $("#view_status").val(row['status']);
-                $("#video_link").val(row['video_link']);
-                $("#category").val(row['category']);
+                $("#category_name").val(row['category_name']);
+                $("#tab_name").val(row['tab_name']);
                 $("#action").val("update");
                 scrollToDiv();
             }
@@ -110,7 +108,7 @@
                 var form = new FormData(this);
                 $.ajax({
                     type: 'POST',
-                    url: '{{ route('saveGuestExp') }}',
+                    url: '{{ route('saveCategory') }}',
                     data: form,
                     cache: false,
                     contentType: false,
@@ -153,7 +151,7 @@
                     if (result.isConfirmed) {
                         $.ajax({
                             type: 'POST',
-                            url: '{{ route('saveGuestExp') }}',
+                            url: '{{ route('saveCategory') }}',
                             data: {
                                 id: id,
                                 action: action,

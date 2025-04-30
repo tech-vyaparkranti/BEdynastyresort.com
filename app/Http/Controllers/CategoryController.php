@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\GuestExperienceRequest;
-use App\Models\GuestExperience;
+use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
 use App\Traits\CommonFunctions;
 use Illuminate\Support\Facades\Auth;
@@ -12,19 +11,18 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
 
-class GuestExperienceController extends Controller
+class CategoryController extends Controller
 {
     use CommonFunctions;
 
-    public function viewGuestExp()
+    public function viewCategory()
     {
-        $category = Category::where("status",1)->where('tab_name','Guest Experience')->get();
-        return view("Dashboard.Pages.manageExpVideo",compact("category"));
+        return view("Dashboard.Pages.manageCategory");
     }
 
-    public function saveGuestExp(GuestExperienceRequest $request)
+    public function saveCategory(CategoryRequest $request)
     {
-        Cache::forget("guest_experiences");
+        Cache::forget("categories");
         switch ($request->input("action")) {
             case "insert":
                 $return = $this->insertData($request);
@@ -44,42 +42,44 @@ class GuestExperienceController extends Controller
         return response()->json($return);
     }
 
-    public function ImageUpload(GuestExperienceRequest $request)
+    public function ImageUpload(CategoryRequest $request)
     {
-        $maxId = GuestExperience::max(GuestExperience::ID);
+        $maxId = Category::max(Category::ID);
         $maxId += 1;
         $timeNow = strtotime($this->timeNow());
         $maxId .= "_$timeNow";
         return $this->uploadLocalFile($request, "image", "/images/gallery/", "gallery_$maxId");
     }
 
-    public function insertData(GuestExperienceRequest $request)
+    public function insertData(CategoryRequest $request)
     {         
-            $createNewRow = new GuestExperience();
+            $createNewRow = new Category();
+            
             $createNewRow->status = $request->status;
-            $createNewRow->category = $request->category;
-            $createNewRow->video_link = $request->video_link;
+            $createNewRow->tab_name = $request->tab_name;
+            $createNewRow->category_name = $request->category_name;
             $createNewRow->save();
             $return = $this->returnMessage("Saved successfully.", true);
         
         return $return;
     }
 
-    public function updateData(GuestExperienceRequest $request)
+    public function updateData(CategoryRequest $request)
     {
-            $updateModel = GuestExperience::find($request->id);           
+            $updateModel = Category::find($request->id);    
+            
             $updateModel->status = $request->status;
-            $updateModel->category = $request->category;
-            $updateModel->video_link = $request->video_link;
+            $updateModel->tab_name = $request->tab_name;
+            $updateModel->category_name = $request->category_name;
             $updateModel->save();
             $return = $this->returnMessage("Saved successfully.", true);
         
         return $return;
     }
 
-    public function enableRow(GuestExperienceRequest $request)
+    public function enableRow(CategoryRequest $request)
     {
-        $check = GuestExperience::where('id', $request->id)->first();
+        $check = Category::where('id', $request->id)->first();
         if ($check) {
             $check->status = 1;
             $check->save();
@@ -91,9 +91,9 @@ class GuestExperienceController extends Controller
         return $return;
     }
 
-    public function disableRow(GuestExperienceRequest $request)
+    public function disableRow(CategoryRequest $request)
     {
-        $check = GuestExperience::where('id', $request->id)->first();
+        $check = Category::where('id', $request->id)->first();
         if ($check) {
             $check->status = 0;
             $check->save();
@@ -105,11 +105,11 @@ class GuestExperienceController extends Controller
         return $return;
     }
 
-    public function guestExpData()
+    public function categoryData()
     {
 
-        $query = GuestExperience::select(
-           'video_link','status','id','category'
+        $query = Category::select(
+            'tab_name' ,'category_name','status','id'
         );
         return DataTables::of($query)
             ->addIndexColumn()
@@ -128,14 +128,18 @@ class GuestExperienceController extends Controller
             ->make(true);
     }
 
-
-    public function getGuestExp()
+    public function getCategory()
     {
-        $rooms = GuestExperience::where('status',1)->get();
+        $categories = Category::where('status',1)->get();
+        $roomCategory = Category::where("status",1)->where('tab_name','Room')->get();
+        $guestCategory = Category::where("status",1)->where('tab_name','Guest Experience')->get();
+
         $data = [
             'status' => true,
             'success' => true,
-            'rooms' => $rooms,
+            'categories' => $categories,
+            'roomCategory' => $roomCategory,
+            'guestCategory' => $guestCategory,
         ];
         return response()->json($data, 200);
     }

@@ -18,13 +18,11 @@
                 placeholder="Banner Image" name="banner_image"></x-input-with-label-element>
 
                 <x-select-with-label id="category" name="category" label="Select Category" required="true">
-                        <option value="SUPER DELUXE LAKE VIEW">SUPER DELUXE LAKE VIEW</option>
-                        <option value="SUPER DELUXE ROOM">SUPER DELUXE ROOM</option>
-                        <option value="EXECUTIVE ROOM">EXECUTIVE ROOM</option>
-                        <option value="PENTHOUSE">PENTHOUSE</option>
-                        <option value="MAHARAJA SINGLE">MAHARAJA SINGLE</option>
-                        <option value="FAMILY ROOM">FAMILY ROOM</option>
-                        <option value="MAHARAJA DOUBLE">MAHARAJA DOUBLE</option>
+                       @if ($category)
+                        @foreach ($category as $item)
+                            <option value="{{$item->category_name}}">{{$item->category_name}}</option>                        
+                        @endforeach
+                       @endif
                 </x-select-with-label>
                 <x-text-area-with-label div_class="col-md-12 col-sm-12 mb-3" id="service_details"
                     placeholder="Room Details" label="Room Details" name="details"  ></x-text-area-with-label>

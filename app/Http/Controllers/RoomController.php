@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\RoomRequest;
 use App\Models\Room;
+use App\Models\Category;
 use App\Traits\CommonFunctions;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
@@ -17,8 +18,8 @@ class RoomController extends Controller
 
     public function viewRoom()
     {
-        
-        return view("Dashboard.Pages.manageRooms");
+        $category = Category::where("status",1)->where('tab_name','Room')->get();
+        return view("Dashboard.Pages.manageRooms",compact('category'));
     }
 
     public function saveRoom(RoomRequest $request)
