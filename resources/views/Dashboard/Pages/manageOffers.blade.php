@@ -25,7 +25,10 @@
                         
                     <x-input-with-label-element type="number" name="offer_price" id="offer_price" placeholder=""
                         label="Offer Price" step="0.01"></x-input-with-label-element>
-                    
+                    <x-select-label-group required name="status" id="view_status" label_text="View Status">
+                            <option value="1">Visibile</option>
+                            <option value="0">Hidden</option>
+                    </x-select-label-group>
                     <div class="form-group">
                         <label for="features">Features</label>
                         <div id="features-container">
@@ -40,10 +43,7 @@
                         <input type="hidden" name="features_json" id="features_json" value="[]">
                     </div>
 
-                    <x-select-label-group required name="status" id="view_status" label_text="View Status">
-                        <option value="1">Visibile</option>
-                        <option value="0">Hidden</option>
-                    </x-select-label-group>
+                    
                     <x-form-buttons></x-form-buttons>
                 </x-form>
             </x-card-body>
@@ -72,7 +72,7 @@
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: "{{ route('guestExpData') }}",
+                    url: "{{ route('offerData') }}",
                     type: 'POST',
                     data: {
                         '_token': '{{ csrf_token() }}'
@@ -99,11 +99,7 @@
                         name: 'title',
                         title: "Title"
                     },
-                    {
-                        data: 'category',
-                        name: 'category',
-                        title: "Category"
-                    },
+                    
                     {
                         data: 'price',
                         name: 'price',
@@ -115,18 +111,19 @@
                         title: "Offer Price"
                     },
                     {
+                        data: 'features',
+                        name: 'features',
+                        title: "Features"
+                    },
+                    {
                         data: 'image',
                         name: 'image',
                         title: "Image",
                         render: function(data) {
-                            return data ? '<img src="' + site_url + '/storage/' + data + '" height="50" />' : 'No Image';
+                            return data ? '<img src="' +  data + '" height="50" />' : 'No Image';
                         }
                     },
-                    {
-                        data: 'video_link',
-                        name: 'video_link',
-                        title: "Video Link"
-                    }
+                    
                 ]
             });
 
@@ -192,8 +189,6 @@
                 $("#id").val(row['id']);
                 $("#title").val(row['title']);
                 $("#view_status").val(row['status']);
-                $("#video_link").val(row['video_link']);
-                $("#category").val(row['category']);
                 $("#price").val(row['price']);
                 $("#offer_price").val(row['offer_price']);
                 $("#action").val("update");
@@ -228,7 +223,7 @@
                 
                 // Show image preview if it exists
                 if (row['image']) {
-                    $('#preview_img').attr('src', site_url + '/storage/' + row['image']);
+                    $('#preview_img').attr('src',  row['image']);
                     $('#image_preview').show();
                 } else {
                     $('#image_preview').hide();
@@ -248,7 +243,7 @@
                 var form = new FormData(this);
                 $.ajax({
                     type: 'POST',
-                    url: '{{ route('saveGuestExp') }}',
+                    url: '{{ route('saveOffer') }}',
                     data: form,
                     cache: false,
                     contentType: false,
@@ -302,7 +297,7 @@
                     if (result.isConfirmed) {
                         $.ajax({
                             type: 'POST',
-                            url: '{{ route('saveGuestExp') }}',
+                            url: '{{ route('saveOffer') }}',
                             data: {
                                 id: id,
                                 action: action,

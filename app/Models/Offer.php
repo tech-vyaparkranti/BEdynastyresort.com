@@ -13,4 +13,6 @@ class Offer extends Model
     protected $fillable = [
         'features' ,'status','offer_price' ,'price','image','title'
     ];
+
+    const ID = "id";
 }

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\GuestExperienceRequest;
-use App\Models\GuestExperience;
+use App\Http\Requests\OfferRequest;
+use App\Models\Offer;
 use App\Traits\CommonFunctions;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
@@ -20,7 +20,7 @@ class OfferController extends Controller
         return view("Dashboard.Pages.manageOffers");
     }
 
-    public function saveOffer(GuestExperienceRequest $request)
+    public function saveOffer(OfferRequest $request)
     {
         Cache::forget("offers");
         switch ($request->input("action")) {
@@ -42,42 +42,86 @@ class OfferController extends Controller
         return response()->json($return);
     }
 
-    public function ImageUpload(GuestExperienceRequest $request)
+    public function ImageUpload(OfferRequest $request)
     {
-        $maxId = GuestExperience::max(GuestExperience::ID);
+        $maxId = Offer::max(Offer::ID);
         $maxId += 1;
         $timeNow = strtotime($this->timeNow());
         $maxId .= "_$timeNow";
         return $this->uploadLocalFile($request, "image", "/images/gallery/", "gallery_$maxId");
     }
 
-    public function insertData(GuestExperienceRequest $request)
+    public function insertData(OfferRequest $request)
     {         
-            $createNewRow = new GuestExperience();
+            $createNewRow = new Offer();
+            if($request->hasFile('image'))
+            {
+                $imageUrl = "";
+                $image = $this->ImageUpload($request);
+                if($image['status'])
+                {
+                    $imageUrl = $image['data'];
+                }
+                else{
+                    return $image;
+                }
+            }
+            if($request->features)
+            {
+                $features = [];
+                foreach ($request->features as $value) {
+                    $features[] = $value;
+                }
+            }
             $createNewRow->status = $request->status;
-            $createNewRow->category = $request->category;
-            $createNewRow->video_link = $request->video_link;
+            $createNewRow->features = json_encode($features);
+            $createNewRow->image = $imageUrl;
+            $createNewRow->offer_price = $request->offer_price;
+            $createNewRow->title = $request->title;
+            $createNewRow->price = $request->price;
             $createNewRow->save();
             $return = $this->returnMessage("Saved successfully.", true);
         
         return $return;
     }
 
-    public function updateData(GuestExperienceRequest $request)
+    public function updateData(OfferRequest $request)
     {
-            $updateModel = GuestExperience::find($request->id);           
+            $updateModel = Offer::find($request->id);    
+            
+            $imageUrl = $updateModel->image;
+
+            if($request->hasFile('image'))
+            {
+                $image = $this->ImageUpload($request);
+                if($image['status'])
+                {
+                    $imageUrl = $image['data'];
+                }
+                
+            }
+            if($request->features)
+            {
+                $features = [];
+                foreach ($request->features as $value) {
+                    $features[] = $value;
+                }
+            }
             $updateModel->status = $request->status;
-            $updateModel->category = $request->category;
-            $updateModel->video_link = $request->video_link;
+            $updateModel->features = json_encode($features);
+            $updateModel->status = $request->status;
+            $updateModel->image = $imageUrl;
+            $updateModel->price = $request->price;
+            $updateModel->offer_price = $request->offer_price;
             $updateModel->save();
             $return = $this->returnMessage("Saved successfully.", true);
         
         return $return;
     }
 
-    public function enableRow(GuestExperienceRequest $request)
+    public function enableRow(OfferRequest $request)
     {
-        $check = GuestExperience::where('id', $request->id)->first();
+        $check = Offer::where('id', $request->id)->first();
         if ($check) {
             $check->status = 1;
             $check->save();
@@ -89,9 +133,9 @@ class OfferController extends Controller
         return $return;
     }
 
-    public function disableRow(GuestExperienceRequest $request)
+    public function disableRow(OfferRequest $request)
     {
-        $check = GuestExperience::where('id', $request->id)->first();
+        $check = Offer::where('id', $request->id)->first();
         if ($check) {
             $check->status = 0;
             $check->save();
@@ -106,8 +150,8 @@ class OfferController extends Controller
     public function offerData()
     {
 
-        $query = GuestExperience::select(
-           'video_link','status','id','category'
+        $query = Offer::select(
+            'features' ,'status','offer_price' ,'price','image','title','id'
         );
         return DataTables::of($query)
             ->addIndexColumn()
@@ -129,7 +173,7 @@ class OfferController extends Controller
 
     public function offerApi()
     {
-        $rooms = GuestExperience::where('status',1)->get();
+        $rooms = Offer::where('status',1)->get();
         $data = [
             'status' => true,
             'success' => true,

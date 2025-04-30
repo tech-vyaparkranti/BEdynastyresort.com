@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string("title");
             $table->string("image");
             $table->string("price");
-            $table->string("offer_price");
+            $table->string("offer_price")->nullable();
             $table->tinyInteger("status")->default(1);
             $table->timestamps();
         });
