@@ -174,13 +174,13 @@ class FacilityController extends Controller
         return response()->json($data, 200);
     }
 
-    public function facilityDetails($id)
+    public function allFacility()
     {
-        $facility = Facility::where('id',$id)->first();
+        $allFacility = Facility::where('status',1)->get();
         $data = [
             'status' => true,
             'success' => true,
-            'facility' => $facility,
+            'allFacility' => $allFacility,
         ];
 
         return response()->json($data, 200);

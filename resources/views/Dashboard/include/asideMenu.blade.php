@@ -162,6 +162,37 @@
                 </a>
             </li>
 
+            <li class="menu-item">
+                <a href="{{ route('viewPackages') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-package"></i>
+                    <div data-i18n="Analytics">Manage Packages</div>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="{{ route('viewService') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-service"></i>
+                    <div data-i18n="Analytics">Manage Services</div>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="{{ route('viewWedTimeline') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-wedding"></i>
+                    <div data-i18n="Analytics">Manage Wedding Timeline</div>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="{{ route('viewWedVenuse') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-wedding"></i>
+                    <div data-i18n="Analytics">Manage Wedding Venuses</div>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="{{ route('viewActivity') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-activity"></i>
+                    <div data-i18n="Analytics">Manage Activity</div>
+                </a>
+            </li>
+
             
             
        

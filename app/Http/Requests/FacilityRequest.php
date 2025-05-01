@@ -36,6 +36,6 @@ class FacilityRequest extends FormRequest
     }
     protected function failedValidation(Validator $validator)
     {
-        throw new HttpResponseException($this->error($validator->getMessageBag()->first(),200));
+        throw new HttpResponseException($this->error($validator->getMessageBag()->first(),422));
     }
 }

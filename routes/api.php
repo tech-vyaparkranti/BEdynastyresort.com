@@ -17,6 +17,11 @@ use App\Http\Controllers\VideoGalleryController;
 use App\Http\Controllers\GuestExperienceController;
 use App\Http\Controllers\OfferController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\PackagesController;
+use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\WedTimelineController;
+use App\Http\Controllers\WedVenuseController;
+use App\Http\Controllers\ActivityController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,6 +57,8 @@ Route::get('get-team',[TeamInfoController::class,'getTeam']);
 
 // facilities api 
 Route::get('get-facilities',[FacilityController::class,'getFacility']);
+Route::get('all-facilities',[FacilityController::class,'allFacility']);
+
 
 // testimonial api
 Route::get('get-testimonial',[TestimonialController::class,'testimonialData']);
@@ -75,4 +82,19 @@ Route::get('get-offers-data',[OfferController::class,'offerApi']);
 
 Route::get('get-categories',[CategoryController::class,'getCategory']);
 
+// packages details 
+Route::get('get-packages',[PackagesController::class,'getPackages']);
+
+
+// services
+Route::get('get-services',[ServiceController::class,'getService']);
+
+// wedding time line api  
+Route::get('get-wed-time',[WedTimelineController::class,'allWedTimeline']);
+
+// wedding venuse
+Route::get('get-wed-venuses',[WedVenuseController::class,'allWedVenuse']);
+
+
+Route::get('get-activity',[ActivityController::class,'getActivity']);
 

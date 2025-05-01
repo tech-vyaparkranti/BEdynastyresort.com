@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\GalleryRequest;
 use App\Models\Gallery;
+use App\Models\Category;
 use App\Traits\CommonFunctions;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
@@ -17,7 +18,8 @@ class GalleryController extends Controller
 
     public function viewGallery()
     {
-        return view("Dashboard.Pages.manageGallery");
+        $category = Category::where("status",1)->where('tab_name','Gallery')->get();
+        return view("Dashboard.Pages.manageGallery",compact('category'));
     }
 
     public function saveGallery(GalleryRequest $request)

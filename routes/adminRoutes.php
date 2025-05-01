@@ -29,6 +29,11 @@ use App\Http\Controllers\VideoGalleryController;
 use App\Http\Controllers\GuestExperienceController;
 use App\Http\Controllers\OfferController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\PackagesController;
+use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\WedTimelineController;
+use App\Http\Controllers\WedVenuseController;
+use App\Http\Controllers\ActivityController;
 
 
 
@@ -119,5 +124,26 @@ Route::get("manage-category",[CategoryController::class,"viewCategory"])->name("
 Route::post("save-category",[CategoryController::class,"saveCategory"])->name("saveCategory");
 Route::post("get-category",[CategoryController::class,"categoryData"])->name("categoryData");
 
+Route::get("manage-packages",[PackagesController::class,"viewPackages"])->name("viewPackages");
+Route::post("save-packages",[PackagesController::class,"savePackages"])->name("savePackages");
+Route::post("packages-data",[PackagesController::class,"packageData"])->name("packageData");
+
+Route::get("manage-service",[ServiceController::class,"viewService"])->name("viewService");
+Route::post("save-service",[ServiceController::class,"saveService"])->name("saveService");
+Route::post("service-data",[ServiceController::class,"serviceData"])->name("serviceData");
+
+Route::get("manage-wed-timeline",[WedTimelineController::class,"viewWedTimeline"])->name("viewWedTimeline");
+Route::post("save-wed-timeline",[WedTimelineController::class,"saveWedTimeline"])->name("saveWedTimeline");
+Route::post("wed-timeline-data",[WedTimelineController::class,"wedTimelineData"])->name("wedTimelineData");
+
+Route::get("manage-wed-venuses",[WedVenuseController::class,"viewWedVenuse"])->name("viewWedVenuse");
+Route::post("save-wed-venuses",[WedVenuseController::class,"saveWedVenuse"])->name("saveWedVenuse");
+Route::post("wed-venuses-data",[WedVenuseController::class,"wedVenuseData"])->name("wedVenuseData");
+
+Route::get("manage-activity",[ActivityController::class,"viewActivity"])->name("viewActivity");
+Route::post("save-activity",[ActivityController::class,"saveActivity"])->name("saveActivity");
+Route::post("activity-data",[ActivityController::class,"activityData"])->name("activityData");
+
 });
+
 
