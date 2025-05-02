@@ -8,7 +8,7 @@
                 <x-input type="hidden" name="id" id="id" value=""></x-input>
                 <x-input type="hidden" name="action" id="action" value="insert"></x-input>
 
-                <x-input-with-label-element id="image" label="Upload Blog Image" name="image" type="file"
+                <x-input-with-label-element id="image" label="Banner Image" name="banner_image" type="file"
                     accept="image/*" required></x-input-with-label-element>
                 <x-input-with-label-element id="blog_images" label="Upload Multiple Blog Image" name="blog_images[]"
                     type="file" accept="image/*" required multiple></x-input-with-label-element>
@@ -27,19 +27,18 @@
                     name="meta_title"></x-input-with-label-element>
                 <x-input-with-label-element id="meta_description" label="Meta Description"
                     name="meta_description"></x-input-with-label-element>
-                <x-select-with-label id="category" name="blog_category" label="Select Category" required="true">
-                    <option value="Content Marketing">Content Marketing</option>
-                    <option value="Social Marketing">Social Marketing</option>
-                    <option value="App Development">App Development</option>
-                    <option value="SEO Optimization">SEO Optimization</option>
-                    <option value="Web Development">Web Development</option>
-                    <option value="PPC Advertising">PPC Advertising</option>
-                </x-select-with-label>
+                    <x-select-with-label id="category" name="blog_category" label="Select Category" required="true">
+                        @if ($category)
+                         @foreach ($category as $item)
+                             <option value="{{$item->category_name}}">{{$item->category_name}}</option>                        
+                         @endforeach
+                        @endif
+                 </x-select-with-label>
 
 
-                <x-select-with-label id="blog_status" name="blog_status" label="Select Blog Status" required="true">
-                    <option value="live">Live</option>
-                    <option value="disabled">Disabled</option>
+                <x-select-with-label id="blog_status" name="status" label="Select Blog Status" required="true">
+                    <option value="1">Live</option>
+                    <option value="0">Disabled</option>
                 </x-select-with-label>
                 <x-input-with-label-element id="blog_sorting" required label="Blog Position" type="numeric"
                     name="blog_sorting"></x-input-with-label-element>
@@ -295,6 +294,17 @@
                             errorMessage(response.message);
                         }
 
+                    },
+                    error: function(xhr) {
+                        if (xhr.status === 422) {
+                            console.log(xhr,"error");
+                            const errors = xhr.responseJSON.message;
+                            // const allMessages = Object.values(errors).flat().join('<br>');
+                            errorMessage(errors);
+                        } else {
+                            console.log(xhr,"error");
+                            errorMessage("Something went wrong");
+                        }
                     },
                     failure: function(response) {
                         errorMessage(response.message);

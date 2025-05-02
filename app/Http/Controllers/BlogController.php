@@ -7,15 +7,17 @@ use App\Models\Blog;
 use App\Traits\CommonFunctions;
 use Exception;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Exceptions\HttpResponseException;
 use Yajra\DataTables\Facades\DataTables;
+use App\Models\Category;
 
 class BlogController extends Controller
 {
     use CommonFunctions;
-    //
 
     public function blogSlider(){
-        return view("Dashboard.Pages.manageBlog");
+        $category = Category::where("status",1)->where('tab_name','Blog')->get();
+        return view("Dashboard.Pages.manageBlog",compact('category'));
     }
 
     public function blogData(){
@@ -55,7 +57,8 @@ class BlogController extends Controller
             ->make(true);
         }
         catch(Exception $except){
-            dd([$except->getMessage()]);
+          throw new HttpResponseException($this->error($except->getMessage()->first(),422));
+
         }
     }
 
@@ -99,7 +102,7 @@ class BlogController extends Controller
             $Blog->{Blog::META_TITLE} = $request->input(Blog::META_TITLE);
             $Blog->{Blog::META_DESCRIPTION} = $request->input(Blog::META_DESCRIPTION);
             $Blog->{Blog::BLOG_STATUS} = $request->input(Blog::BLOG_STATUS);           
-            $Blog->{Blog::STATUS} = 1;
+            $Blog->{Blog::BLOG_SORTING} = $request->input(Blog::BLOG_SORTING);           
             $Blog->{Blog::CREATED_BY} = Auth::user()->id;
             $Blog->save();
             $return = ["status"=>true,"message"=>"Saved successfully","data"=>null];
@@ -115,7 +118,7 @@ class BlogController extends Controller
         $maxId += 1;
         $timeNow = strtotime($this->timeNow());
         $maxId .= "_$timeNow";
-        return $this->uploadLocalFile($request,"image","/images/blog/","slide_$maxId");
+        return $this->uploadLocalFile($request,"banner_image","/images/blog/","slide_$maxId");
     }
 
     public function blogMultipleImage(BlogRequest $request){
@@ -127,7 +130,7 @@ class BlogController extends Controller
     }
 
     public function updateBlog(BlogRequest $request){
-        $check = Blog::where([Blog::ID=>$request->input(Blog::ID),Blog::STATUS=>1])->first();
+        $check = Blog::where([Blog::ID=>$request->input(Blog::ID),Blog::BLOG_STATUS=>1])->first();
         if($check){
             if($request->hasFile('image') ){
                 $imageUpload =$this->blogImageUpload($request);
@@ -144,6 +147,7 @@ class BlogController extends Controller
                     $check->{Blog::META_KEYWORD} = $request->input(Blog::META_KEYWORD);
                     $check->{Blog::META_TITLE} = $request->input(Blog::META_TITLE);
                     $check->{Blog::META_DESCRIPTION} = $request->input(Blog::META_DESCRIPTION);
+                    $check->{Blog::BLOG_SORTING} = $request->input(Blog::BLOG_SORTING);           
                     
                     $check->{Blog::BLOG_STATUS} = $request->input(Blog::BLOG_STATUS);
                     $check->{Blog::UPDATED_BY} = Auth::user()->id;

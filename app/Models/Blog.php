@@ -13,7 +13,7 @@ class Blog extends Model
     protected $table = "blogs";
 
     const ID = "id";
-    const IMAGE = "image";
+    const IMAGE = "banner_image";
     const TITLE = "title";
     const CONTENT = "content";
     const BLOG_DATE = "blog_date";
@@ -25,9 +25,9 @@ class Blog extends Model
     const META_TITLE = "meta_title";
     const META_DESCRIPTION = "meta_description";
     const BLOG_CATEGORY = "blog_category";
-    const BLOG_STATUS = "blog_status";
+    const BLOG_STATUS = "status";
     const BLOG_SORTING = "blog_sorting";
-    const STATUS = "status";
+    // const STATUS = "status";
     const CREATED_BY = "created_by";
     const UPDATED_BY = "updated_by";
     const CREATED_AT = "created_at";
@@ -35,8 +35,8 @@ class Blog extends Model
     const BLOG_IMAGES = 'blog_images';
 
 
-    const BLOG_STATUS_LIVE = "live";
-    const BLOG_STATUS_DISABLED = "disabled";
+    const BLOG_STATUS_LIVE = 1;
+    const BLOG_STATUS_DISABLED = 0;
     #"live","disabled"
 
     protected static function boot() {

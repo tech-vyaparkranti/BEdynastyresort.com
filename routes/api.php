@@ -4,8 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\BlogController;
-use App\Http\Controllers\OurServicesModelController;
-use App\Http\Controllers\TestModelController;
+use App\Http\Controllers\NewsLetterController;
+use App\Http\Controllers\BussConfrenceController;
 use App\Http\Controllers\WebSiteElementsController;
 use App\Http\Controllers\TeamInfoController;
 use App\Http\Controllers\AboutUsController;
@@ -22,6 +22,8 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\WedTimelineController;
 use App\Http\Controllers\WedVenuseController;
 use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\WeddingController;
+use App\Http\Controllers\SatsangController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,9 +44,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('home-elements',[WebSiteElementsController::class,'homeElements']);
 Route::get('get-blogs',[BlogController::class,'getBlogs']);
 Route::get('blog-details/{id}',[BlogController::class,'blogDetails']);
-
-Route::get('get-service',[OurServicesModelController::class,'getService']);
-Route::get('service-details/{id}',[OurServicesModelController::class,'serviceDetail']);
 
 // About Api 
 Route::get('get-about',[AboutUsController::class,'getAbout']);
@@ -97,4 +96,10 @@ Route::get('get-wed-venuses',[WedVenuseController::class,'allWedVenuse']);
 
 
 Route::get('get-activity',[ActivityController::class,'getActivity']);
+Route::get('get-wedding',[WeddingController::class,'getWedding']);
+Route::get('get-satsang',[SatsangController::class,'getSatsang']);
+Route::get('get-conference',[BussConfrenceController::class,'getConfrence']);
+
+// subscribe news letter api  
+Route::post('store-subscriber',[NewsLetterController::class,'subscribeNewsLetter']);
 

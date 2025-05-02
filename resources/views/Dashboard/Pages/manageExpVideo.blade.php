@@ -1,10 +1,10 @@
 @extends('layouts.dashboardLayout')
-@section('title', 'Manage Video Gallery')
+@section('title', 'Manage Guest Experience')
 @section('content')
 
-    <x-dashboard-container container_header="Manage Video Gallery">
+    <x-dashboard-container container_header="Manage Guest Experience">
         <x-card>
-            <x-card-header>Add Video Gallery Items</x-card-header>
+            <x-card-header>Add Guest Experience Items</x-card-header>
             <x-card-body>
                 <x-form>
                     <x-input type="hidden" name="id" id="id" value=""></x-input>
@@ -30,7 +30,7 @@
             </x-card-body>
         </x-card>
         <x-card>
-            <x-card-header>Video Gallery Data</x-card-header>
+            <x-card-header>Guest Experience Data</x-card-header>
             <x-card-body>
                 <x-data-table></x-data-table>
             </x-card-body>

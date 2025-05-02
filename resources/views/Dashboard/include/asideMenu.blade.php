@@ -72,6 +72,12 @@
                     <div data-i18n="Analytics">WebSite Elements</div>
                 </a>
             </li>
+            <li class="menu-item">
+                <a href="{{ route('viewCategory') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-category"></i>
+                    <div data-i18n="Analytics">Manage Category</div>
+                </a>
+            </li>
 
             <li class="menu-item">
                 <a href="{{ route('manageGallery') }}" class="menu-link">
@@ -79,18 +85,111 @@
                     <div data-i18n="Analytics">Manage Gallery</div>
                 </a>
             </li>
-            <li class="menu-item">
-                <a href="{{ route('viewOurServicesMaster') }}" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-book-content"></i>
-                    <div data-i18n="Analytics">Manage Services</div>
-                </a>
-            </li>
-
            
             <li class="menu-item">
                 <a href="{{ route('blogSlider') }}" class="menu-link">
                     <i class="menu-icon tf-icons bx bx-notepad"></i>
                     <div data-i18n="Analytics">Manage Blog</div>
+                </a>
+            </li>            
+            
+            <li class="menu-item">
+                <a href="{{ route('viewAboutInfo') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-info-circle"></i>
+                    <div data-i18n="Analytics">Manage About Us</div>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="{{ route('viewTeamInfo') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-group"></i>
+                    <div data-i18n="Analytics">Manage Team</div>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="{{ route('viewFacility') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-home-alt"></i>
+                    <div data-i18n="Analytics">Manage Facilities</div>
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="{{ route('viewTestimonial') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-comment-detail"></i>
+                    <div data-i18n="Analytics">Manage Testimonial</div>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="{{ route('viewRoom') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-home"></i>
+                    <div data-i18n="Analytics">Manage Rooms</div>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="{{ route('viewVideo') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-video"></i>
+                    <div data-i18n="Analytics">Manage Video Gallery</div>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="{{ route('viewGuestExp') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-user-voice"></i>
+                    <div data-i18n="Analytics">Manage Guest Experiences</div>
+                </a>
+            </li>
+
+            <li class="menu-item">
+                <a href="{{ route('viewOffer') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-purchase-tag"></i>
+                    <div data-i18n="Analytics">Manage Offers View</div>
+                </a>
+            </li>
+
+            <li class="menu-item">
+                <a href="{{ route('viewPackages') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-package"></i>
+                    <div data-i18n="Analytics">Manage Packages</div>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="{{ route('viewService') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-book-content"></i>
+                    <div data-i18n="Analytics">Manage Services</div>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="{{ route('viewWedTimeline') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-time"></i>
+                    <div data-i18n="Analytics">Manage Wedding Timeline</div>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="{{ route('viewWedVenuse') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-planet"></i>
+                    <div data-i18n="Analytics">Manage Wedding Venuses</div>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="{{ route('viewActivity') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-trophy"></i>
+                    <div data-i18n="Analytics">Manage Events & Activity</div>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="{{ route('viewSatsang') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-archive"></i>
+                    <div data-i18n="Analytics">Manage Satsang</div>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="{{ route('viewWedding') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-heart"></i>
+                    <div data-i18n="Analytics">Manage Wedding</div>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="{{ route('viewConfrence') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-group"></i>
+                    <div data-i18n="Analytics">Manage Business Conferences</div>
                 </a>
             </li>
             <li class="menu-item">
@@ -105,95 +204,6 @@
                     <div data-i18n="Analytics">Enquiry Data</div>
                 </a>
             </li>
-            <li class="menu-item">
-                <a href="{{ route('viewTeamInfo') }}" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-category"></i>
-                    <div data-i18n="Analytics">Manage Team</div>
-                </a>
-            </li>
-            <li class="menu-item">
-                <a href="{{ route('viewAboutInfo') }}" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-category"></i>
-                    <div data-i18n="Analytics">Manage About Us</div>
-                </a>
-            </li>
-
-            <li class="menu-item">
-                <a href="{{ route('viewFacility') }}" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-category"></i>
-                    <div data-i18n="Analytics">Manage Facilities</div>
-                </a>
-            </li>
-            <li class="menu-item">
-                <a href="{{ route('viewCategory') }}" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-category"></i>
-                    <div data-i18n="Analytics">Manage Category</div>
-                </a>
-            </li>
-            <li class="menu-item">
-                <a href="{{ route('viewTestimonial') }}" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-message"></i>
-                    <div data-i18n="Analytics">Manage Testimonial</div>
-                </a>
-            </li>
-            <li class="menu-item">
-                <a href="{{ route('viewRoom') }}" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-message"></i>
-                    <div data-i18n="Analytics">Manage Rooms</div>
-                </a>
-            </li>
-            <li class="menu-item">
-                <a href="{{ route('viewVideo') }}" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-message"></i>
-                    <div data-i18n="Analytics">Manage Video Gallery</div>
-                </a>
-            </li>
-            <li class="menu-item">
-                <a href="{{ route('viewGuestExp') }}" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-message"></i>
-                    <div data-i18n="Analytics">Manage Guest Experiences</div>
-                </a>
-            </li>
-
-            <li class="menu-item">
-                <a href="{{ route('viewOffer') }}" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-offer"></i>
-                    <div data-i18n="Analytics">Manage Offers View</div>
-                </a>
-            </li>
-
-            <li class="menu-item">
-                <a href="{{ route('viewPackages') }}" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-package"></i>
-                    <div data-i18n="Analytics">Manage Packages</div>
-                </a>
-            </li>
-            <li class="menu-item">
-                <a href="{{ route('viewService') }}" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-service"></i>
-                    <div data-i18n="Analytics">Manage Services</div>
-                </a>
-            </li>
-            <li class="menu-item">
-                <a href="{{ route('viewWedTimeline') }}" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-wedding"></i>
-                    <div data-i18n="Analytics">Manage Wedding Timeline</div>
-                </a>
-            </li>
-            <li class="menu-item">
-                <a href="{{ route('viewWedVenuse') }}" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-wedding"></i>
-                    <div data-i18n="Analytics">Manage Wedding Venuses</div>
-                </a>
-            </li>
-            <li class="menu-item">
-                <a href="{{ route('viewActivity') }}" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-activity"></i>
-                    <div data-i18n="Analytics">Manage Activity</div>
-                </a>
-            </li>
-
-            
             
        
     </ul>

@@ -23,7 +23,8 @@ class NewsLetterController extends Controller
             [
                 "captcha.required"=>"Captcha text is required.",
                 "captcha.captcha"=>"Captcha text is not correct."
-            ]);
+            ]
+        );
             if($validate->fails()){
                 $response = $this->returnMessage($validate->getMessageBag()->first());
             }else{

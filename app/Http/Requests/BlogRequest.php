@@ -66,7 +66,7 @@ class BlogRequest extends FormRequest
                     Blog::META_TITLE => 'bail|nullable',
                     Blog::META_DESCRIPTION => 'bail|nullable',
                     Blog::BLOG_SORTING => 'nullable|integer',
-                    Blog::BLOG_STATUS => 'required|in:live,disabled',
+                    "status" => 'required',
                     Blog::IMAGE => 'nullable|image|mimes:jpeg,png,jpg',
                     'blog_images' => 'required|array',
                     'blog_images.*' => 'image',                                   
@@ -83,7 +83,7 @@ class BlogRequest extends FormRequest
                     Blog::META_TITLE => 'bail|nullable',
                     Blog::META_DESCRIPTION => 'bail|nullable',
                     Blog::BLOG_SORTING => 'nullable|integer',
-                    Blog::BLOG_STATUS => 'required|in:live,disabled',
+                    "status" => 'required',
                     Blog::IMAGE => 'nullable|image|mimes:jpeg,png,jpg',
                 ];
 
@@ -91,27 +91,13 @@ class BlogRequest extends FormRequest
                 return [];
         }
     }
-    public function messages()
-    {
-        return [
-            // "heading_top.string"=>"Top Heading Text should be a valid string.",
-            // "heading_top.max"=>"Top Heading Text should be ,ax 500 charaters long.",
-            // "heading_middle.string"=>"Top Heading Text should be a valid string.",
-            // "heading_middle.max"=>"Top Heading Text should be ,max 500 charaters long.",
-            // "heading_bottom.string"=>"Top Heading Text should be a valid string.",
-            // "heading_bottom.max"=>"Top Heading Text should be ,ax 500 charaters long.",
-            "blog_status.required_if"=>"Slide status is requried.",
-            "blog_status.in"=>"Slide status can be live or disabled.",
-            "image.max"=>"Max image size should be 2 mb.",
-            // "image.dimensions"=>"Dimensions should be in aspect ratio 16:9 or pixels w*h 1920*1080"
-        ];
-    }
+    
     /**
     * Get the error messages for the defined validation rules.*
     * @return array
     */
     protected function failedValidation(Validator $validator)
     {
-        throw new HttpResponseException($this->error($validator->getMessageBag()->first(),200));
+        throw new HttpResponseException($this->error($validator->getMessageBag()->first(),422));
     }
 }
