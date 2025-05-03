@@ -24,8 +24,8 @@ class WebSiteElementsController extends Controller
         "facebook_link",
         "youtube_link",
         "instagram_link",
-        "twitter",
-        "linkedin",
+        "twitter_link",
+        "linkedin_link",
         "about_banner_heading",
         "about_banner",
         "room_banner_heading",
@@ -185,5 +185,94 @@ class WebSiteElementsController extends Controller
             'elements' => $elementData,
         ];
         return response()->json($data, 200);
+    }
+
+    public function topHeaderElement()
+    {
+        $mail = WebSiteElements::where('status','1')->where('element','mail')->value("element_details");
+        $mobile = WebSiteElements::where('status','1')->where('element','mobile')->value("element_details");
+        $address = WebSiteElements::where('status','1')->where('element','address')->value("element_details");
+        $logo = WebSiteElements::where('status','1')->where('element','logo')->value("element_details");
+        $data = [
+            'status' => true,
+            'success' => true,
+            'mail' => $mail,
+            "mobile" => $mobile,
+            "address" => $address,
+            "logo" =>$logo,
+        ];
+        return response()->json($data, 200);
+    }
+
+    public function contactElements()
+    {
+        $mail = WebSiteElements::where('status','1')->where('element','mail')->value("element_details");
+        $mobile = WebSiteElements::where('status','1')->where('element','mobile')->value("element_details");
+        $address = WebSiteElements::where('status','1')->where('element','address')->value("element_details");
+        $facebook = WebSiteElements::where('status','1')->where('element','facebook_link')->value("element_details");
+        $youtube = WebSiteElements::where('status','1')->where('element','youtube_link')->value("element_details");
+        $instagram = WebSiteElements::where('status','1')->where('element','instagram_link')->value("element_details");
+        $twitter = WebSiteElements::where('status','1')->where('element','twitter_link')->value("element_details");
+        $linkedin = WebSiteElements::where('status','1')->where('element','linkedin_link')->value("element_details");
+        $map = WebSiteElements::where('status','1')->where('element','mao_link')->value("element_details");
+        $data = [
+            'status' => true,
+            'success' => true,
+            'mail' => $mail,
+            "mobile" => $mobile,
+            "map" => $map ,
+            "address" => $address,'linkedin' =>$linkedin,
+            "facebook" =>$facebook, 'youtube' => $youtube ,'instagram' => $instagram ,'twitter' => $twitter
+        ];
+        return response()->json($data, 200);
+    }
+
+    public function socialMedia()
+    {
+        $facebook = WebSiteElements::where('status','1')->where('element','facebook_link')->value("element_details");
+        $youtube = WebSiteElements::where('status','1')->where('element','youtube_link')->value("element_details");
+        $instagram = WebSiteElements::where('status','1')->where('element','instagram_link')->value("element_details");
+        $twitter = WebSiteElements::where('status','1')->where('element','twitter_link')->value("element_details");
+        $linkedin = WebSiteElements::where('status','1')->where('element','linkedin_link')->value("element_details");
+        $data = [
+            'status' => true,
+            'success' => true,
+            'linkedin' =>$linkedin,
+            "facebook" =>$facebook, 'youtube' => $youtube ,'instagram' => $instagram ,'twitter' => $twitter
+        ];
+        return response()->json($data, 200);
+    }
+
+    public function heroBanner()
+    {
+        $requiredElements = [
+            "about_banner_heading",
+            "about_banner",
+            "room_banner_heading",
+            "room_banner",
+            "event_banner_heading",
+            "event_banner",
+            "wedding_banner_heading",
+            "wedding_banner",
+            "satsang_banner_heading",
+            "satsang_banner",
+            "guest_banner_heading",
+            "guest_banner",
+            "gallery_banner_heading",
+            "gallery_banner",
+            "offer_banner_heading",
+            "offer_banner",
+        ];
+        
+        $bannerData = WebSiteElements::where('status', 1)
+            ->whereIn('element', $requiredElements)
+            ->pluck('element_details', 'element')
+            ->toArray();
+            $data = [
+                'status' => true,
+                'success' => true,
+                'bannerData' => $bannerData,
+            ];
+            return response()->json($data, 200);
     }
 }
