@@ -50,6 +50,11 @@
                         title: "Email"
                     },
                     {
+                        data: 'phone_number',
+                        name: 'phone_number',
+                        title: "Phone Number"
+                    },
+                    {
                         data: 'message',
                         name: 'message',
                         title: "Message"

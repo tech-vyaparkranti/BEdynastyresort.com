@@ -18,13 +18,13 @@ class EnquiryFormController extends Controller
     public function enquiryDetails(EnquiryFormRequest $request){
         try{
             
-            $check = EnquiryForm::where([
-                // [EnquiryForm::EMAIL,$request->input(EnquiryForm::EMAIL)],
-                [EnquiryForm::PHONE_NUMBER,$request->input(EnquiryForm::PHONE_NUMBER)],
-            ])->whereRaw("date(created_at)=date(now())")->first();
-            if($check){
-                $response = $this->error("You already sent a message for today.");
-            } else {
+            // $check = EnquiryForm::where([
+            //     // [EnquiryForm::EMAIL,$request->input(EnquiryForm::EMAIL)],
+            //     [EnquiryForm::PHONE_NUMBER,$request->input(EnquiryForm::PHONE_NUMBER)],
+            // ])->whereRaw("date(created_at)=date(now())")->first();
+            // if($check){
+            //     $response = $this->error("You already sent a message for today.");
+            // } else {
                 $newEnquiry = new EnquiryForm();
                 $newEnquiry->{EnquiryForm::NAME} = $request->input(EnquiryForm::NAME);
                 // $newEnquiry->{EnquiryForm::EMAIL} = $request->input(EnquiryForm::EMAIL);
@@ -36,7 +36,7 @@ class EnquiryFormController extends Controller
                 $newEnquiry->save();
 
                 $response = $this->success("Thank you for your message. We will contact you shortly.",[]);
-            }
+            // }
         }catch(Exception $exception){
             report($exception);
              $response = $this->error("Something went wrong. " . $exception->getMessage());

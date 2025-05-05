@@ -16,13 +16,13 @@ class ContactUsController extends Controller
     use ResponseAPI;
     public function saveContactUsDetails(ContactUsRequest $request){
         try{
-            $check = ContactUsModel::where([
+            // $check = ContactUsModel::where([
                 // [ContactUsModel::EMAIL,$request->input(ContactUsModel::EMAIL)],
-                [ContactUsModel::PHONE_NUMBER,$request->input(ContactUsModel::PHONE_NUMBER)],
-            ])->whereRaw("date(created_at)=date(now())")->first();
-            if($check){
-                $response = $this->error("You already sent a message for today.");
-            }else{
+            //     [ContactUsModel::PHONE_NUMBER,$request->input(ContactUsModel::PHONE_NUMBER)],
+            // ])->whereRaw("date(created_at)=date(now())")->first();
+            // if($check){
+            //     $response = $this->error("You already sent a message for today.");
+            // }else{
                 $newContactUs = new ContactUsModel();
                 $newContactUs->{ContactUsModel::NAME} = $request->input(ContactUsModel::NAME);
                 // $newContactUs->{ContactUsModel::ADDRESS} = $request->input(ContactUsModel::ADDRESS);
@@ -36,7 +36,7 @@ class ContactUsController extends Controller
                 $newContactUs->save();
                 $this->sendContactUsEmail($newContactUs);
                 $response = $this->success("Thank you for your message. We will contact you shortly.",[]);
-            }
+            // }
         }catch(Exception $exception){
             report($exception);
             $response = $this->error("Something went wrong. ".$exception->getMessage());
