@@ -27,7 +27,7 @@ class ContactUsController extends Controller
                 $newContactUs->{ContactUsModel::NAME} = $request->input(ContactUsModel::NAME);
                 // $newContactUs->{ContactUsModel::ADDRESS} = $request->input(ContactUsModel::ADDRESS);
                 // $newContactUs->{ContactUsModel::LAST_NAME} = $request->input(ContactUsModel::LAST_NAME);
-                // $newContactUs->{ContactUsModel::EMAIL} = $request->input(ContactUsModel::EMAIL);
+                $newContactUs->{ContactUsModel::EMAIL} = $request->input(ContactUsModel::EMAIL);
                 // $newContactUs->{ContactUsModel::COUNTRY_CODE} = $request->input(ContactUsModel::COUNTRY_CODE);
                 $newContactUs->{ContactUsModel::PHONE_NUMBER} = $request->input(ContactUsModel::PHONE_NUMBER);
                 $newContactUs->{ContactUsModel::MESSAGE} = $request->input(ContactUsModel::MESSAGE);
@@ -54,7 +54,7 @@ class ContactUsController extends Controller
             ContactUsModel::NAME,
             // ContactUsModel::ADDRESS,
             // ContactUsModel::LAST_NAME,
-            // ContactUsModel::EMAIL,
+            ContactUsModel::EMAIL,
             ContactUsModel::MESSAGE,
             ContactUsModel::PHONE_NUMBER,
             ContactUsModel::ID,

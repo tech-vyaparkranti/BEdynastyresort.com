@@ -45,7 +45,8 @@ class WebSiteElementsController extends Controller
         "facility_banner",
         "home_video_link",
         "footer_content",
-        "banner_image",
+        "home_video_link_image",
+        'enquiry_banner_image',
     ];
     public function addWebSiteElements()
     {
@@ -287,7 +288,7 @@ class WebSiteElementsController extends Controller
     public function videoLink()
     {
         $videoLink = WebSiteElements::where('status','1')->where('element','home_video_link')->value("element_details");
-        $bannerImage = WebSiteElements::where('status','1')->where('element','banner_image')->value("element_details");
+        $bannerImage = WebSiteElements::where('status','1')->where('element','home_video_link_image')->value("element_details");
 
         $data = [
             'status' => true,
@@ -297,5 +298,17 @@ class WebSiteElementsController extends Controller
         ];
         return response()->json($data, 200);
         
+    }
+
+    public function enquiryImage()
+    {
+        $enquiryImage = WebSiteElements::where('status','1')->where('element','enquiry_banner_image')->value("element_details");
+
+        $data = [
+            'status' => true,
+            'success' => true,
+            'enquiryImage' => $enquiryImage,
+        ];
+        return response()->json($data, 200);
     }
 }

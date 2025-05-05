@@ -43,10 +43,11 @@
                         name: 'name',
                         title: "Name"
                     }, 
+                    
                     {
-                        data: 'phone_number',
-                        name: 'phone_number',
-                        title: "Phone Number"
+                        data: 'email',
+                        name: 'email',
+                        title: "Email"
                     },
                     {
                         data: 'message',

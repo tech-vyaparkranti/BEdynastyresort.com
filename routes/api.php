@@ -25,6 +25,8 @@ use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\WeddingController;
 use App\Http\Controllers\SatsangController;
 use App\Http\Controllers\SliderController;
+use App\Http\Controllers\FAQController;
+use App\Http\Controllers\EnquiryFormController;
 
 
 /*
@@ -50,6 +52,8 @@ Route::middleware('throttle:500,1')->group(function () {
     Route::get('social-media',[WebSiteElementsController::class,'socialMedia']);
     Route::get('hero-banner',[WebSiteElementsController::class,'heroBanner']);
     Route::get('home-video-link',[WebSiteElementsController::class,'videoLink']);
+    Route::get('enquiry-banner',[WebSiteElementsController::class,'enquiryImage']);
+
 
 
     Route::get('get-blogs',[BlogController::class,'getBlogs']);
@@ -118,6 +122,12 @@ Route::middleware('throttle:500,1')->group(function () {
 
     // contact us api
     Route::post('save-contact',[ContactUsController::class,'saveContactUsDetails']);
+
+    // enquiry api
+    Route::post('save-enquiry',[EnquiryFormController::class,'enquiryDetails']);
+
+    // faq data  api  
+    Route::get('get-faq-data',[FAQController::class,'faqData']);
 
 
 });

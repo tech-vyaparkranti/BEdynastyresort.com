@@ -34,6 +34,7 @@ use App\Http\Controllers\WedVenuseController;
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\SatsangController;
 use App\Http\Controllers\BussConfrenceController;
+use App\Http\Controllers\FAQController;
 
 
 Route::get("login",[AdminController::class,"Login"])->name("login");
@@ -148,6 +149,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get("manage-slider",[SliderController::class,"slider"])->name("slider");
     Route::post("save-slider",[SliderController::class,"saveSlide"])->name("saveSlide");
     Route::post("slider-data",[SliderController::class,"sliderData"])->name("sliderData");
+
+    Route::get("show-faq", [FAQController::class, "viewFaq"])->name("viewFaq");
+    Route::post("save-faq", [FAQController::class, "saveFaq"])->name("saveFaq");
+    Route::post("get-faq", [FAQController::class, "getFaq"])->name("getFaq");
 
 });
 

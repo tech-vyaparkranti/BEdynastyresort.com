@@ -31,7 +31,7 @@ class ContactUsRequest extends FormRequest
             "name"=>"required|string|max:50",
             // "last_name"=>"required|string|max:50",
             // "address"=>"required|string|max:50",
-            // "email"=>"required|email|max:100",
+            "email"=>"required|email|max:100",
             "phone_number"=>"required|integer|digits:10",
             "message"=>"required|string|max:1000",
             // "captcha"=>"required|captcha",
