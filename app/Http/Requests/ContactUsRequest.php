@@ -32,8 +32,8 @@ class ContactUsRequest extends FormRequest
             // "last_name"=>"required|string|max:50",
             // "address"=>"required|string|max:50",
             // "email"=>"required|email|max:100",
-            "phone_number"=>"required|integer",
-            // "message"=>"required|string|max:1000",
+            "phone_number"=>"required|integer|digits:10",
+            "message"=>"required|string|max:1000",
             // "captcha"=>"required|captcha",
             // "country_code"=>"nullable|string|max:10"
         ];
@@ -69,6 +69,6 @@ class ContactUsRequest extends FormRequest
     */
     protected function failedValidation(Validator $validator)
     {
-        throw new HttpResponseException($this->error($validator->getMessageBag()->first(),200));
+        throw new HttpResponseException($this->error($validator->getMessageBag()->first(),422));
     }
 }

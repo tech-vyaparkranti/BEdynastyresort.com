@@ -16,7 +16,6 @@ use App\Http\Controllers\EnquiryFormController;
 use App\Http\Controllers\DownloadFileController;
 use App\Http\Controllers\WeddingController;
 use App\Http\Controllers\WebSiteElementsController;
-use App\Http\Controllers\OurServicesModelController;
 use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\TeamInfoController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
@@ -50,17 +49,10 @@ Route::middleware(['auth'])->group(function () {
     Route::post("addGalleryDataTable",[GalleryController::class,"galleryData"])->name("galleryData");
 
  
-    Route::get("our-services-master", [OurServicesModelController::class, "viewOurServicesMaster"])->name("viewOurServicesMaster");
-    Route::post("save-our-services", [OurServicesModelController::class, "saveOurServicesMaster"])->name("saveOurServicesMaster");
-    Route::post("our-services-data", [OurServicesModelController::class, "ourServicesData"])->name("ourServicesData");
-    Route::match(['get', 'post'], 'logout',  [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+  Route::match(['get', 'post'], 'logout',  [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
     //package Master
     
-    Route::resource('packageMaster', PackageMasterController::class);
-    Route::post("package-master-data-table",[PackageMasterController::class,"dataTable"])->name("packageMasterDataTable");
-    Route::post("add-city",[PackageMasterController::class,"addCity"])->name("add-city");
-    Route::post("enable-disable",[PackageMasterController::class,"enableDisablePackage"])->name("enableDisablePackage");
 
     //contactUsData
     Route::get("contact-us-admin-page", [ContactUsController::class, "contactUsAdminPage"])->name("contactUsData");
@@ -70,10 +62,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get("enquiry-admin-page", [EnquiryFormController::class, "enquiryAdminPage"])->name("enquiryAdminPage");
     Route::post("enquiry-data-table", [EnquiryFormController::class, "enquiryDataTable"])->name("enquiryDataTable");
 
-    Route::get("manage-package-categories",[PackageCategoryController::class,"managePackageCategories"])->name("managePackageCategories");
-    Route::post("add-package-category-data",[PackageCategoryController::class,"addPackageCategoryData"])->name("addPackageCategoryData");
-    Route::post("packageCategoryData",[PackageCategoryController::class,"packageCategoryData"])->name("packageCategoryData");
-    
+   
     Route::get("manage-news-letter-data",[NewsLetterController::class,"manageNewsLetterAdmin"])->name("manageNewsLetterData");
     Route::post("get-news-letter-data",[NewsLetterController::class,"getNewsLetterData"])->name("getNewsLetterData");
 
@@ -155,6 +144,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get("manage-conference",[BussConfrenceController::class,"viewConfrence"])->name("viewConfrence");
     Route::post("save-conference",[BussConfrenceController::class,"saveConfrence"])->name("saveConfrence");
     Route::post("conference-data",[BussConfrenceController::class,"confrenceData"])->name("confrenceData");
+
+    Route::get("manage-slider",[SliderController::class,"slider"])->name("slider");
+    Route::post("save-slider",[SliderController::class,"saveSlide"])->name("saveSlide");
+    Route::post("slider-data",[SliderController::class,"sliderData"])->name("sliderData");
 
 });
 

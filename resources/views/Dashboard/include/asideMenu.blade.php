@@ -73,6 +73,12 @@
                 </a>
             </li>
             <li class="menu-item">
+                <a href="{{ route('slider') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-category"></i>
+                    <div data-i18n="Analytics">Control Slider</div>
+                </a>
+            </li>
+            <li class="menu-item">
                 <a href="{{ route('viewCategory') }}" class="menu-link">
                     <i class="menu-icon tf-icons bx bx-category"></i>
                     <div data-i18n="Analytics">Manage Category</div>
@@ -198,12 +204,12 @@
                     <div data-i18n="Analytics">Contact Us Data</div>
                 </a>
             </li>
-            <li class="menu-item">
+            {{-- <li class="menu-item">
                 <a href="{{ route('enquiryAdminPage') }}" class="menu-link">
                     <i class="menu-icon tf-icons bx bx-message-alt-check"></i>
                     <div data-i18n="Analytics">Enquiry Data</div>
                 </a>
-            </li>
+            </li> --}}
             
        
     </ul>

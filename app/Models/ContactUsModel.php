@@ -13,7 +13,7 @@ class ContactUsModel extends Model
 
     const ID = "id";
     const NAME = "name";
-    const ADDRESS = "address";
+    // const ADDRESS = "address";
     // const LAST_NAME = "last_name";
     // const EMAIL = "email";
     // const COUNTRY_CODE = "country_code";

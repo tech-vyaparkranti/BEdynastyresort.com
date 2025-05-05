@@ -21,11 +21,11 @@ class ContactUsController extends Controller
                 [ContactUsModel::PHONE_NUMBER,$request->input(ContactUsModel::PHONE_NUMBER)],
             ])->whereRaw("date(created_at)=date(now())")->first();
             if($check){
-                $response = $this->error("You alread sent a message for today.");
+                $response = $this->error("You already sent a message for today.");
             }else{
                 $newContactUs = new ContactUsModel();
                 $newContactUs->{ContactUsModel::NAME} = $request->input(ContactUsModel::NAME);
-                $newContactUs->{ContactUsModel::ADDRESS} = $request->input(ContactUsModel::ADDRESS);
+                // $newContactUs->{ContactUsModel::ADDRESS} = $request->input(ContactUsModel::ADDRESS);
                 // $newContactUs->{ContactUsModel::LAST_NAME} = $request->input(ContactUsModel::LAST_NAME);
                 // $newContactUs->{ContactUsModel::EMAIL} = $request->input(ContactUsModel::EMAIL);
                 // $newContactUs->{ContactUsModel::COUNTRY_CODE} = $request->input(ContactUsModel::COUNTRY_CODE);
@@ -52,7 +52,7 @@ class ContactUsController extends Controller
         
         $query = ContactUsModel::select(
             ContactUsModel::NAME,
-            ContactUsModel::ADDRESS,
+            // ContactUsModel::ADDRESS,
             // ContactUsModel::LAST_NAME,
             // ContactUsModel::EMAIL,
             ContactUsModel::MESSAGE,

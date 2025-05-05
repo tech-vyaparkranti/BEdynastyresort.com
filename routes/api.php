@@ -24,6 +24,8 @@ use App\Http\Controllers\WedVenuseController;
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\WeddingController;
 use App\Http\Controllers\SatsangController;
+use App\Http\Controllers\SliderController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -41,72 +43,81 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('home-elements',[WebSiteElementsController::class,'homeElements']);
-Route::get('top-header',[WebSiteElementsController::class,'topHeaderElement']);
-Route::get('contact-elements',[WebSiteElementsController::class,'contactElements']);
-Route::get('social-media',[WebSiteElementsController::class,'socialMedia']);
-Route::get('hero-banner',[WebSiteElementsController::class,'heroBanner']);
+Route::middleware('throttle:500,1')->group(function () {
+    Route::get('home-elements',[WebSiteElementsController::class,'homeElements']);
+    Route::get('top-header',[WebSiteElementsController::class,'topHeaderElement']);
+    Route::get('contact-elements',[WebSiteElementsController::class,'contactElements']);
+    Route::get('social-media',[WebSiteElementsController::class,'socialMedia']);
+    Route::get('hero-banner',[WebSiteElementsController::class,'heroBanner']);
+    Route::get('home-video-link',[WebSiteElementsController::class,'videoLink']);
 
 
+    Route::get('get-blogs',[BlogController::class,'getBlogs']);
+    Route::get('blog-details/{id}',[BlogController::class,'blogDetails']);
 
-Route::get('get-blogs',[BlogController::class,'getBlogs']);
-Route::get('blog-details/{id}',[BlogController::class,'blogDetails']);
+    // About Api 
+    Route::get('get-about',[AboutUsController::class,'getAbout']);
+    // Route::get('about-details/{id}',[AboutUsController::class,'aboutDetails']);
 
-// About Api 
-Route::get('get-about',[AboutUsController::class,'getAbout']);
-// Route::get('about-details/{id}',[AboutUsController::class,'aboutDetails']);
-
-// team api
-Route::get('get-team',[TeamInfoController::class,'getTeam']);
-// Route::get('team-details/{id}',[TeamInfoController::class,'teamDetail']);
-
-
-// facilities api 
-Route::get('get-facilities',[FacilityController::class,'getFacility']);
-Route::get('all-facilities',[FacilityController::class,'allFacility']);
+    // team api
+    Route::get('get-team',[TeamInfoController::class,'getTeam']);
+    // Route::get('team-details/{id}',[TeamInfoController::class,'teamDetail']);
 
 
-// testimonial api
-Route::get('get-testimonial',[TestimonialController::class,'testimonialData']);
-Route::get('testimonial-details/{id}',[TestimonialController::class,'TestimonialDetails']);
+    // facilities api 
+    Route::get('get-facilities',[FacilityController::class,'getFacility']);
+    Route::get('all-facilities',[FacilityController::class,'allFacility']);
 
 
-Route::get('get-room',[RoomController::class,'getRoom']);
-Route::get('room-details/{slug}',[RoomController::class,'roomDetail']);
-
-// gallery api
-
-Route::get('get-gallery',[GalleryController::class,'getGallery']);
-
-// video gallery api
-Route::get('get-video-gallery',[VideoGalleryController::class,'getVideoGallery']);
-Route::get('get-guest-exp',[GuestExperienceController::class,'getGuestExp']);
-// offer api
-Route::get('get-offers-data',[OfferController::class,'offerApi']);
-
-// category api 
-
-Route::get('get-categories',[CategoryController::class,'getCategory']);
-
-// packages details 
-Route::get('get-packages',[PackagesController::class,'getPackages']);
+    // testimonial api
+    Route::get('get-testimonial',[TestimonialController::class,'testimonialData']);
+    Route::get('testimonial-details/{id}',[TestimonialController::class,'TestimonialDetails']);
 
 
-// services
-Route::get('get-services',[ServiceController::class,'getService']);
+    Route::get('get-room',[RoomController::class,'getRoom']);
+    Route::get('room-details/{slug}',[RoomController::class,'roomDetail']);
 
-// wedding time line api  
-Route::get('get-wed-time',[WedTimelineController::class,'allWedTimeline']);
+    // gallery api
 
-// wedding venuse
-Route::get('get-wed-venuses',[WedVenuseController::class,'allWedVenuse']);
+    Route::get('get-gallery',[GalleryController::class,'getGallery']);
+
+    // video gallery api
+    Route::get('get-video-gallery',[VideoGalleryController::class,'getVideoGallery']);
+    Route::get('get-guest-exp',[GuestExperienceController::class,'getGuestExp']);
+    // offer api
+    Route::get('get-offers-data',[OfferController::class,'offerApi']);
+
+    // category api 
+
+    Route::get('get-categories',[CategoryController::class,'getCategory']);
+
+    // packages details 
+    Route::get('get-packages',[PackagesController::class,'getPackages']);
 
 
-Route::get('get-activity',[ActivityController::class,'getActivity']);
-Route::get('get-wedding',[WeddingController::class,'getWedding']);
-Route::get('get-satsang',[SatsangController::class,'getSatsang']);
-Route::get('get-conference',[BussConfrenceController::class,'getConfrence']);
+    // services
+    Route::get('get-services',[ServiceController::class,'getService']);
 
-// subscribe news letter api  
-Route::post('store-subscriber',[NewsLetterController::class,'subscribeNewsLetter']);
+    // wedding time line api  
+    Route::get('get-wed-time',[WedTimelineController::class,'allWedTimeline']);
 
+    // wedding venuse
+    Route::get('get-wed-venuses',[WedVenuseController::class,'allWedVenuse']);
+
+
+    Route::get('get-activity',[ActivityController::class,'getActivity']);
+    Route::get('get-wedding',[WeddingController::class,'getWedding']);
+    Route::get('get-satsang',[SatsangController::class,'getSatsang']);
+    Route::get('get-conference',[BussConfrenceController::class,'getConfrence']);
+
+    // subscribe news letter api   
+    Route::post('store-subscriber',[NewsLetterController::class,'subscribeNewsLetter']);
+
+    // control slider 
+    Route::get('get-sliders',[SliderController::class,'getSlider']);
+
+    // contact us api
+    Route::post('save-contact',[ContactUsController::class,'saveContactUsDetails']);
+
+
+});

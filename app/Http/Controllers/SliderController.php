@@ -24,7 +24,6 @@ class SliderController extends Controller
         SliderModel::ID,
         SliderModel::HEADING_TOP,
         SliderModel::HEADING_BOTTOM,
-        SliderModel::HEADING_MIDDLE,
         SliderModel::SLIDE_SORTING,
         SliderModel::SLIDE_STATUS);
         return DataTables::of($query)
@@ -76,11 +75,10 @@ class SliderController extends Controller
             $sliderModel = new SliderModel();
             $sliderModel->{SliderModel::IMAGE} = $imageUpload["data"];
             $sliderModel->{SliderModel::HEADING_TOP} = $request->input(SliderModel::HEADING_TOP);
-            $sliderModel->{SliderModel::HEADING_MIDDLE} = $request->input(SliderModel::HEADING_MIDDLE);
+            // $sliderModel->{SliderModel::HEADING_MIDDLE} = $request->input(SliderModel::HEADING_MIDDLE);
             $sliderModel->{SliderModel::HEADING_BOTTOM} = $request->input(SliderModel::HEADING_BOTTOM);
             $sliderModel->{SliderModel::SLIDE_STATUS} = $request->input(SliderModel::SLIDE_STATUS);
             $sliderModel->{SliderModel::SLIDE_SORTING} = $request->input(SliderModel::SLIDE_SORTING);           
-            $sliderModel->{SliderModel::STATUS} = 1;
             $sliderModel->{SliderModel::CREATED_BY} = Auth::user()->id;
             $sliderModel->save();
             $return = ["status"=>true,"message"=>"Saved successfully","data"=>null];
@@ -100,7 +98,7 @@ class SliderController extends Controller
     }
 
     public function updateSlide(SliderRequest $request){
-        $check = SliderModel::where([SliderModel::ID=>$request->input(SliderModel::ID),SliderModel::STATUS=>1])->first();
+        $check = SliderModel::where([SliderModel::ID=>$request->input(SliderModel::ID)])->first();
         if($check){
             if($request->input(SliderModel::IMAGE)){
                 $imageUpload =$this->slideImageUpload($request);
@@ -108,7 +106,6 @@ class SliderController extends Controller
                     $check->{SliderModel::IMAGE} = $imageUpload["data"];
                     $check->{SliderModel::SLIDE_SORTING} = $request->input(SliderModel::SLIDE_SORTING);
                     $check->{SliderModel::HEADING_TOP} = $request->input(SliderModel::HEADING_TOP);
-                    $check->{SliderModel::HEADING_MIDDLE} = $request->input(SliderModel::HEADING_MIDDLE);
                     $check->{SliderModel::HEADING_BOTTOM} = $request->input(SliderModel::HEADING_BOTTOM);
                     $check->{SliderModel::SLIDE_STATUS} = $request->input(SliderModel::SLIDE_STATUS);
                     $check->{SliderModel::UPDATED_BY} = Auth::user()->id;
@@ -121,7 +118,6 @@ class SliderController extends Controller
             }else{
                 $check->{SliderModel::SLIDE_SORTING} = $request->input(SliderModel::SLIDE_SORTING);
                 $check->{SliderModel::HEADING_TOP} = $request->input(SliderModel::HEADING_TOP);
-                $check->{SliderModel::HEADING_MIDDLE} = $request->input(SliderModel::HEADING_MIDDLE);
                 $check->{SliderModel::HEADING_BOTTOM} = $request->input(SliderModel::HEADING_BOTTOM);
                 $check->{SliderModel::SLIDE_STATUS} = $request->input(SliderModel::SLIDE_STATUS);
                 $check->{SliderModel::UPDATED_BY} = Auth::user()->id;
@@ -152,5 +148,17 @@ class SliderController extends Controller
             $return = ["status"=>false,"message"=>"Details not found.","data"=>""];
         }
         return $return;
+    }
+
+    public function getSlider()
+    {
+        $sliders = SliderModel::where("slide_status",'live')->get();
+        $data = [
+            'status' => true,
+            'success' => true,
+            'sliders' => $sliders,
+        ];
+
+        return response()->json($data, 200);
     }
 }

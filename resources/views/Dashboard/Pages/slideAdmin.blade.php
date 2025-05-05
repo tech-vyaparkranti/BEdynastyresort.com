@@ -11,14 +11,14 @@
                 <x-input-with-label-element id="image" label="Upload Slider Image" name="image" type="file" accept="image/*"
                     required></x-input-with-label-element>
 
-                {{-- <x-input-with-label-element id="heading_top" label="Top Heading Text"
-                    name="heading_top"></x-input-with-label-element> --}}
+                <x-input-with-label-element id="heading_top" label="Top Heading Text"
+                    name="heading_top"></x-input-with-label-element>
 
                 {{-- <x-input-with-label-element id="heading_middle" label="Middle Heading Text"
                     name="heading_middle"></x-input-with-label-element> --}}
 
-                {{-- <x-input-with-label-element id="heading_bottom" label="Bootom Heading Text"
-                    name="heading_bottom"></x-input-with-label-element> --}}
+                <x-input-with-label-element id="heading_bottom" label="Bootom Heading Text"
+                    name="heading_bottom"></x-input-with-label-element>
 
                 <x-select-with-label id="slide_status" name="slide_status" label="Select Slide Status" required="true">
                     <option value="live">Live</option>
@@ -57,7 +57,15 @@
                         '_token': '{{ csrf_token() }}'
                     }
                 },
-                columns: [{
+                columns: [
+                    {
+                        data: 'action',
+                        name: 'action',
+                        orderable: false,
+                        searchable: false,
+                        title: 'Action'
+                    },    
+                    {
                         data: "DT_RowIndex",
                         orderable: false,
                         searchable: false,
@@ -74,7 +82,7 @@
                         render: function(data, type, row) {
                             let image = '';
                             if (data) {
-                                image = '<img alt="Image Link" src="' + site_url + data +
+                                image = '<img alt="Image Link" src="' + data +
                                     '" class="img-thumbnail">'
                             }
                             return image;
@@ -94,12 +102,16 @@
                         title: 'Slide Sorting'
                     },
                     {
-                        data: 'action',
-                        name: 'action',
-                        orderable: false,
-                        searchable: false,
-                        title: 'Action'
+                        data: '{{ \App\Models\SliderModel::HEADING_TOP }}',
+                        name: '{{ \App\Models\SliderModel::HEADING_TOP }}',
+                        title: 'Top Heading'
                     },
+                    {
+                        data: '{{ \App\Models\SliderModel::HEADING_BOTTOM }}',
+                        name: '{{ \App\Models\SliderModel::HEADING_BOTTOM }}',
+                        title: 'Bottom Heading'
+                    },
+                    
                 ],
                 order: [
                     [1, "desc"]
@@ -112,9 +124,9 @@
             if (row['id']) {
                 $("#id").val(row['id']);
                 $("#image").attr("required",false);
-                // $("#heading_top").val(row['heading_top']);
+                $("#heading_top").val(row['heading_top']);
                 // $("#heading_middle").val(row['heading_middle']);
-                // $("#heading_bottom").val(row['heading_bottom']);
+                $("#heading_bottom").val(row['heading_bottom']);
                 $("#slide_status").val(row['slide_status']);
                 $("#slide_sorting").val(row['slide_sorting']);
                 $("#action").val("update");

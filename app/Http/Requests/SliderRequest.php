@@ -6,6 +6,8 @@ use App\Traits\ResponseAPI;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Validation\Rule;
+
 
 class SliderRequest extends FormRequest
 {
@@ -27,15 +29,23 @@ class SliderRequest extends FormRequest
      */
     public function rules()
     {
+        $id = $this->input('id');   
+
         return [
-            "id"=>"bail|required_if:action,update,enable,disable|nullable|exists:slider,id",
+            "id"=>"bail|required_if:action,update,enable,disable|nullable|exists:control_sliders,id",
             "action"=>"bail|required|in:insert,update,enable,disable",
             "heading_top"=>"bail|nullable|string|max:500",
             "heading_middle"=>"bail|nullable|string|max:500",
             "heading_bottom"=>"bail|nullable|string|max:500",
-            "image"=>"bail|file|image|max:2048|required_if:action,insert|dimensions:ratio=16/9",
+            "image"=>"bail|image|required_if:action,insert|dimensions:ratio=16/9",
             "slide_status"=>"required_if:action,update|in:live,disabled",
-            "slide_sorting"=>"required_if:action,update,insert|numeric|gt:0"
+            "slide_sorting"=>[
+                'bail',
+                'required_if:action,update,insert',
+                'nullable',
+                'numeric',
+                Rule::unique('control_sliders', 'slide_sorting')->ignore($id),
+            ],
         ];
     }
 

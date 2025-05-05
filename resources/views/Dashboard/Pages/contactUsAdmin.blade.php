@@ -44,12 +44,6 @@
                         title: "Name"
                     }, 
                     {
-                        data:'address',
-                        name:'address',
-                        title:'Address'
-                    } ,                   
-                    
-                    {
                         data: 'phone_number',
                         name: 'phone_number',
                         title: "Phone Number"

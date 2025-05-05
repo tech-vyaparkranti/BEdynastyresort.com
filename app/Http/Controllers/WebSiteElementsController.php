@@ -43,6 +43,9 @@ class WebSiteElementsController extends Controller
         "offer_banner_heading",
         "offer_banner",
         "facility_banner",
+        "home_video_link",
+        "footer_content",
+        "banner_image",
     ];
     public function addWebSiteElements()
     {
@@ -215,12 +218,15 @@ class WebSiteElementsController extends Controller
         $twitter = WebSiteElements::where('status','1')->where('element','twitter_link')->value("element_details");
         $linkedin = WebSiteElements::where('status','1')->where('element','linkedin_link')->value("element_details");
         $map = WebSiteElements::where('status','1')->where('element','mao_link')->value("element_details");
+        $footer_content = WebSiteElements::where('status','1')->where('element','footer_content')->value("element_details");
+        $logo = WebSiteElements::where('status','1')->where('element','logo')->value("element_details");
+
         $data = [
             'status' => true,
             'success' => true,
             'mail' => $mail,
             "mobile" => $mobile,
-            "map" => $map ,
+            "map" => $map , 'footer_content' => $footer_content,'logo' => $logo,
             "address" => $address,'linkedin' =>$linkedin,
             "facebook" =>$facebook, 'youtube' => $youtube ,'instagram' => $instagram ,'twitter' => $twitter
         ];
@@ -229,11 +235,13 @@ class WebSiteElementsController extends Controller
 
     public function socialMedia()
     {
+        
         $facebook = WebSiteElements::where('status','1')->where('element','facebook_link')->value("element_details");
         $youtube = WebSiteElements::where('status','1')->where('element','youtube_link')->value("element_details");
         $instagram = WebSiteElements::where('status','1')->where('element','instagram_link')->value("element_details");
         $twitter = WebSiteElements::where('status','1')->where('element','twitter_link')->value("element_details");
         $linkedin = WebSiteElements::where('status','1')->where('element','linkedin_link')->value("element_details");
+
         $data = [
             'status' => true,
             'success' => true,
@@ -274,5 +282,20 @@ class WebSiteElementsController extends Controller
                 'bannerData' => $bannerData,
             ];
             return response()->json($data, 200);
+    }
+
+    public function videoLink()
+    {
+        $videoLink = WebSiteElements::where('status','1')->where('element','home_video_link')->value("element_details");
+        $bannerImage = WebSiteElements::where('status','1')->where('element','banner_image')->value("element_details");
+
+        $data = [
+            'status' => true,
+            'success' => true,
+            'videoLink' => $videoLink,
+            'bannerImage' => $bannerImage,
+        ];
+        return response()->json($data, 200);
+        
     }
 }
