@@ -94,7 +94,7 @@ class SliderController extends Controller
         $maxId += 1;
         $timeNow = strtotime($this->timeNow());
         $maxId .= "_$timeNow";
-        return $this->uploadLocalFile($request,"image","/website/uploads/Slider/","slide_$maxId");
+        return $this->uploadLocalFile($request,"image","/images/Slider/","slide_$maxId");
     }
 
     public function updateSlide(SliderRequest $request){

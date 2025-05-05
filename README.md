@@ -80,4 +80,4 @@ php artisan serve --host=0.0.0.0 --port=8000
 
 
 run this command on plesk root directory for symbolic link(images )
-ln -s /var/www/vhosts/vyaparkranti.com/laravel/public/images /var/www/vhosts/vyaparkranti.com/httpdocs/laravel/images
+ln -s /var/www/vhosts/vyaparkranti.com/laravel/public/website /var/www/vhosts/vyaparkranti.com/httpdocs/laravel/website
