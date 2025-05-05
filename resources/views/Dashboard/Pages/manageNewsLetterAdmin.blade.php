@@ -37,7 +37,7 @@
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: "{{ route('getNewsLetterData') }}",
+                    url: "{{ route('getNewsData') }}",
                     type: 'POST',
                     data: {
                         '_token': '{{ csrf_token() }}'
@@ -53,11 +53,6 @@
                         orderable: false,
                         searchable: false,
                         title: "Sr.No."
-                    },
-                    {
-                        data: 'id',
-                        name: 'id',
-                        title: "Id"
                     },
                     {
                         data: 'email_id',

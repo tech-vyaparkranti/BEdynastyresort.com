@@ -154,6 +154,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post("save-faq", [FAQController::class, "saveFaq"])->name("saveFaq");
     Route::post("get-faq", [FAQController::class, "getFaq"])->name("getFaq");
 
+    Route::get("show-subscribe", [NewsLetterController::class, "manageNewsLetterAdmin"])->name("viewNewsLetter");
+    Route::post("subscribe-data", [NewsLetterController::class, "getNewsLetterData"])->name("getNewsData");    
+
 });
 
 

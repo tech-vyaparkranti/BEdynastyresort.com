@@ -18,12 +18,8 @@ class NewsLetterController extends Controller
             $validate = Validator::make($request->all(),
             [
                 NewsLetterEmail::EMAIL_ID=>"required|unique:news_letter_emails",
-                "captcha"=>"required|captcha"
             ],
-            [
-                "captcha.required"=>"Captcha text is required.",
-                "captcha.captcha"=>"Captcha text is not correct."
-            ]
+           
         );
             if($validate->fails()){
                 $response = $this->returnMessage($validate->getMessageBag()->first());

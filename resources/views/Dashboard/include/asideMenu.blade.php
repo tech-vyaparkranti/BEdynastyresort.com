@@ -216,6 +216,12 @@
                     <div data-i18n="Analytics">Manage FAQ</div>
                 </a>
             </li>
+            <li class="menu-item">
+                <a href="{{ route('viewNewsLetter') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-group"></i>
+                    <div data-i18n="Analytics">Manage Subscribers Data</div>
+                </a>
+            </li>
             
        
     </ul>
