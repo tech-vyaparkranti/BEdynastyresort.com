@@ -222,6 +222,12 @@
                     <div data-i18n="Analytics">Manage Subscribers Data</div>
                 </a>
             </li>
+            <li class="menu-item">
+                <a href="{{ route('wedEnquiry') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-heart"></i>
+                    <div data-i18n="Analytics">Wedding Enquiry Data</div>
+                </a>
+            </li>
             
        
     </ul>

@@ -27,6 +27,8 @@ use App\Http\Controllers\SatsangController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\FAQController;
 use App\Http\Controllers\EnquiryFormController;
+use App\Http\Controllers\WeddingEnquiryController;
+
 
 
 /*
@@ -130,4 +132,5 @@ Route::middleware('throttle:5000,1')->group(function () {
     Route::get('get-faq-data',[FAQController::class,'faqData']);
 
 
+    Route::post('wed-enquiry',[WeddingEnquiryController::class,'store']);
 });

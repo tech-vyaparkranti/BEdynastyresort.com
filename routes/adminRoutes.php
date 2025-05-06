@@ -35,6 +35,8 @@ use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\SatsangController;
 use App\Http\Controllers\BussConfrenceController;
 use App\Http\Controllers\FAQController;
+use App\Http\Controllers\WeddingEnquiryController;
+
 
 
 Route::get("login",[AdminController::class,"Login"])->name("login");
@@ -156,6 +158,9 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get("show-subscribe", [NewsLetterController::class, "manageNewsLetterAdmin"])->name("viewNewsLetter");
     Route::post("subscribe-data", [NewsLetterController::class, "getNewsLetterData"])->name("getNewsData");    
+
+    Route::get("manage-wed-enquiry", [WeddingEnquiryController::class, "wedEnquiry"])->name("wedEnquiry");
+    Route::post("wed-enquiry-data", [WeddingEnquiryController::class, "enquiryDataTable"])->name("wedEnquiryTable");    
 
 });
 
