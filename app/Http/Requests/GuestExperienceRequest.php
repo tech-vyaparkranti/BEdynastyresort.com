@@ -30,7 +30,7 @@ class GuestExperienceRequest extends FormRequest
         return [
             'video_link' => "bail|required_if:action,update,insert|url",
             'category' => "bail|required_if:action,update,insert|string",
-            'id'=>"bail|required_if:action,update,enable,disable|nullable|exists:video_galleries,id",
+            'id'=>"bail|required_if:action,update,enable,disable|nullable|exists:guest_experiences,id",
             "action"=>"bail|required|in:insert,update,enable,disable",
         ];
     }

@@ -34,7 +34,7 @@ class PackagesRequest extends FormRequest
             'image'=>"bail|required_if:action,insert|nullable|image|max:2048",
             'category'=>"bail|required_if:action,update,insert|nullable",
             "action"=>"bail|required|in:insert,update,enable,disable",
-            'short_desc'=>"bail|required_if:action,update,insert|nullable|max:1000",
+            'short_desc'=>"bail|required_if:action,update,insert|nullable",
             'allowance_details'=>"bail|required_if:action,update,insert|nullable|max:50",
             'price'=>"bail|required_if:action,update,insert|nullable",
         ];

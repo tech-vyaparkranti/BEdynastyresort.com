@@ -31,7 +31,7 @@ class WeddingRequest extends FormRequest
             'images'=>"bail|required_if:action,insert|nullable|array|min:2",
             'images.*' => "image|max:5120",
             'description'=>"bail|required_if:action,update,insert|nullable",
-            'short_desc'=>"bail|required_if:action,update,insert|nullable|max:1000",
+            'short_desc'=>"bail|required_if:action,update,insert|nullable",
             "action"=>"bail|required|in:insert,update,enable,disable",
         ];
     }

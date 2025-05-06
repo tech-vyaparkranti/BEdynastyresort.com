@@ -29,7 +29,7 @@ class ServiceRequest extends FormRequest
             'id'=>"bail|required_if:action,update,enable,disable|nullable|exists:services,id",
             'title'=>"bail|required_if:action,update,insert|nullable|string|max:500|unique:services,title,",
             'image'=>"bail|required_if:action,insert|nullable|image",
-            'description'=>"bail|required_if:action,update,insert|nullable:max:150",
+            'description'=>"bail|required_if:action,update,insert|nullable",
             "action"=>"bail|required|in:insert,update,enable,disable",
         ];
     }

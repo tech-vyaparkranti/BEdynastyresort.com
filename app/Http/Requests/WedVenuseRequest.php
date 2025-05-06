@@ -30,7 +30,7 @@ class WedVenuseRequest extends FormRequest
             'id'=>"bail|required_if:action,update,enable,disable|nullable|exists:wed_venuses,id",
             'title'=>"bail|required_if:action,update,insert|nullable|string|max:500",
             'icon'=>"bail|required_if:action,insert|nullable|image|max:2048",
-            'description'=>"bail|required_if:action,update,insert|nullable:max:150",
+            'description'=>"bail|required_if:action,update,insert|nullable",
             "action"=>"bail|required|in:insert,update,enable,disable",
         ];
     }

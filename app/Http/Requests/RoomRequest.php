@@ -7,6 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Validation\Rule;
 
 class RoomRequest extends FormRequest
 {
@@ -28,7 +29,14 @@ class RoomRequest extends FormRequest
     {
         return [
             'id'=>"bail|required_if:action,update,enable,disable|nullable|exists:rooms,id",
-            'title'=>"bail|required_if:action,update,insert|nullable|string|max:500|unique:rooms,title",
+            'title'=>[
+                'bail',
+                'string',
+                'max:500',
+                Rule::requiredIf(function () {
+                    return in_array(request('action'), ['insert', 'update']);
+                }),
+                Rule::unique('rooms', 'title')->ignore(request('id'))],
             'features'=>"bail|nullable|string",
             'amenities'=>"bail|nullable|string",
             'banner_image'=>"bail|required_if:action,insert|nullable|image|max:2048",

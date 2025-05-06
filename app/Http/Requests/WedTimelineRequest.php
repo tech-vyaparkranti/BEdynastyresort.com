@@ -28,7 +28,7 @@ class WedTimelineRequest extends FormRequest
         return [
             'id'=>"bail|required_if:action,update,enable,disable|nullable|exists:wed_timelines,id",
             'title'=>"bail|required_if:action,update,insert|nullable|string|max:500",
-            'description'=>"bail|required_if:action,update,insert|nullable:max:300",
+            'description'=>"bail|required_if:action,update,insert|nullable",
             "action"=>"bail|required|in:insert,update,enable,disable",
         ];
     }
