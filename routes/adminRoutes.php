@@ -65,10 +65,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get("enquiry-admin-page", [EnquiryFormController::class, "enquiryAdminPage"])->name("enquiryAdminPage");
     Route::post("enquiry-data-table", [EnquiryFormController::class, "enquiryDataTable"])->name("enquiryDataTable");
 
-   
-    Route::get("manage-news-letter-data",[NewsLetterController::class,"manageNewsLetterAdmin"])->name("manageNewsLetterData");
-    Route::post("get-news-letter-data",[NewsLetterController::class,"getNewsLetterData"])->name("getNewsLetterData");
-
     Route::get("blog-admin", [BlogController::class, "blogSlider"])->name("blogSlider");
     Route::post("save-blog", [BlogController::class, "saveBlog"])->name("saveBlog");
     Route::post("blog-data", [BlogController::class, "blogData"])->name("blogData");
@@ -157,7 +153,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post("get-faq", [FAQController::class, "getFaq"])->name("getFaq");
 
     Route::get("show-subscribe", [NewsLetterController::class, "manageNewsLetterAdmin"])->name("viewNewsLetter");
-    Route::post("subscribe-data", [NewsLetterController::class, "getNewsLetterData"])->name("getNewsData");    
+    Route::post("subscribe-data", [NewsLetterController::class, "getNewsLetterData"])->name("getNewsData");  
 
     Route::get("manage-wed-enquiry", [WeddingEnquiryController::class, "wedEnquiry"])->name("wedEnquiry");
     Route::post("wed-enquiry-data", [WeddingEnquiryController::class, "enquiryDataTable"])->name("wedEnquiryTable");    

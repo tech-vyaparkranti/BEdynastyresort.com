@@ -47,7 +47,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// Route::middleware('throttle:5000,1')->group(function () {
+// Route::middleware('throttle:api')->group(function () {
     Route::get('home-elements',[WebSiteElementsController::class,'homeElements']);
     Route::get('top-header',[WebSiteElementsController::class,'topHeaderElement']);
     Route::get('contact-elements',[WebSiteElementsController::class,'contactElements']);
