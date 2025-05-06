@@ -98,9 +98,10 @@ class SliderController extends Controller
     }
 
     public function updateSlide(SliderRequest $request){
+        
         $check = SliderModel::where([SliderModel::ID=>$request->input(SliderModel::ID)])->first();
         if($check){
-            if($request->input(SliderModel::IMAGE)){
+            if($request->hasFile('image')){
                 $imageUpload =$this->slideImageUpload($request);
                 if($imageUpload["status"]){
                     $check->{SliderModel::IMAGE} = $imageUpload["data"];
