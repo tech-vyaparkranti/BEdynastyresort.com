@@ -62,6 +62,26 @@ class WebSiteElementsController extends Controller
         "offer_banner",
         "offer_banner_description",
 
+        "activity_banner",
+        "activity_banner_heading",
+        "activity_banner_description",
+
+        "blog_banner",
+        "blog_banner_heading",
+        "blog_banner_description",
+
+        "contact_banner",
+        "contact_banner_heading",
+        "contact_banner_description",
+
+        "service_banner",
+        "service_banner_heading",
+        "service_banner_description",
+
+        "restaurant_banner",
+        "restaurant_banner_heading",
+        "restaurant_banner_description",
+
 
         "facility_banner",
         "home_video_link",
@@ -301,6 +321,27 @@ class WebSiteElementsController extends Controller
             "guest_banner_description",
             "gallery_banner_description",
             "offer_banner_description",
+
+            
+            "activity_banner",
+            "activity_banner_heading",
+            "activity_banner_description",
+
+            "blog_banner",
+            "blog_banner_heading",
+            "blog_banner_description",
+
+            "contact_banner",
+            "contact_banner_heading",
+            "contact_banner_description",
+
+            "service_banner",
+            "service_banner_heading",
+            "service_banner_description",
+
+            "restaurant_banner",
+            "restaurant_banner_heading",
+            "restaurant_banner_description",
 
         ];
         
