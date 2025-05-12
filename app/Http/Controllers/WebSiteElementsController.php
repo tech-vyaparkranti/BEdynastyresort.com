@@ -88,6 +88,10 @@ class WebSiteElementsController extends Controller
         "footer_content",
         "home_video_link_image",
         'enquiry_banner_image',
+
+         "package_banner",
+        "package_banner_heading",
+        "package_banner_description",
     ];
     public function addWebSiteElements()
     {
@@ -342,6 +346,10 @@ class WebSiteElementsController extends Controller
             "restaurant_banner",
             "restaurant_banner_heading",
             "restaurant_banner_description",
+
+            "package_banner",
+            "package_banner_heading",
+            "package_banner_description",
 
         ];
         
