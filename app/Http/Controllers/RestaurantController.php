@@ -162,7 +162,7 @@ class RestaurantController extends Controller
     }
     public function restaurantGallery()
     {
-        $restImages = Gallery::where('category', "restaurant")->get();
+        $restImages = Gallery::where('category', "Restaurant")->get();
         $data = [
             'status' => true,
             'success' => true,
