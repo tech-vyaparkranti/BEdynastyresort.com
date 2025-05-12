@@ -36,6 +36,7 @@ use App\Http\Controllers\SatsangController;
 use App\Http\Controllers\BussConfrenceController;
 use App\Http\Controllers\FAQController;
 use App\Http\Controllers\WeddingEnquiryController;
+use App\Http\Controllers\RestaurantController;
 
 
 
@@ -157,6 +158,10 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get("manage-wed-enquiry", [WeddingEnquiryController::class, "wedEnquiry"])->name("wedEnquiry");
     Route::post("wed-enquiry-data", [WeddingEnquiryController::class, "enquiryDataTable"])->name("wedEnquiryTable");    
+
+    Route::get("view-restaurant", [RestaurantController::class, "viewRestaurant"])->name("viewRestaurant");
+    Route::post("save-restaurant-info", [RestaurantController::class, "saveRestaurant"])->name("saveRestaurant");
+    Route::post("get-restaurant-info", [RestaurantController::class, "restaurantData"])->name("restaurantData");
 
 });
 

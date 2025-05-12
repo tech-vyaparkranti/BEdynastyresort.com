@@ -17,6 +17,7 @@
                         <option value="Services">Services</option> 
                         <option value="Gallery">Gallery</option> 
                         <option value="Blog">Blog</option> 
+                        <option value="Restaurant">Restaurant</option> 
                     </x-select-with-label>
 
                     <x-input-with-label-element type="text" name="category_name" id="category_name" placeholder=""

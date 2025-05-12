@@ -7,29 +7,31 @@ use App\Traits\CommonFunctions;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
-use App\Http\Requests\FacilityRequest;
+use App\Http\Requests\RestaurantRequest;
 use Yajra\DataTables\Facades\DataTables;
-use App\Models\Facility;
-use App\Models\WebSiteElements;
+use App\Models\Restaurant;
+use App\Models\Category;
+use App\Models\Gallery;
 
 
-class FacilityController extends Controller
+class RestaurantController extends Controller
 {
+    
     use CommonFunctions;
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function viewFacility()
+    public function viewRestaurant()
     {
         
-        return view("Dashboard.Pages.manageFacility");
+        return view("Dashboard.Pages.manageRestaurant");
     }
 
-    public function saveFacility(FacilityRequest $request)
+    public function saveRestaurant(RestaurantRequest $request)
     {
-        Cache::forget("facilities");
+        Cache::forget("restaurants");
         switch ($request->input("action")) {
             case "insert":
                 $return = $this->insertData($request);
@@ -49,33 +51,27 @@ class FacilityController extends Controller
         return response()->json($return);
     }
 
-    public function ImageUpload(FacilityRequest $request)
+    public function multipleImage(RestaurantRequest $request)
     {
-        $maxId = Facility::max(Facility::ID);
+        $maxId = Restaurant::max(Restaurant::ID);
         $maxId += 1;
         $timeNow = strtotime($this->timeNow());
         $maxId .= "_$timeNow";
-        return $this->uploadLocalFile($request, 'icon', "/images/facilities/", "facility_$maxId");
+        return $this->uploadMultipleLocalFiles($request, 'images', "/images/restaurant/", "service_image_$maxId");
     }
 
-    public function insertData(FacilityRequest $request)
+    public function insertData(RestaurantRequest $request)
     {
             $image_url = "";
             
-            if($request->file('icon')){
-                $aboutImage = $this->ImageUpload($request);
-                if($aboutImage['status'])
-                {
-                    $image_url = $aboutImage['data'];
-                }
-                else{
-                    $image_url;
-                }
+            if($request->file('images')){
+                $aboutImage = $this->multipleImage($request);
+                $image_url = array_column($aboutImage, 'data');
             }           
             
-            $createNewRow = new Facility();
+            $createNewRow = new Restaurant();
             $createNewRow->title = $request->title;
-            $createNewRow->icon = $image_url;
+            $createNewRow->images = json_encode($image_url);
             $createNewRow->description = $request->description;
             $createNewRow->status = $request->status;
             $createNewRow->save();
@@ -84,33 +80,28 @@ class FacilityController extends Controller
         return $return;
     }
 
-    public function updateData(FacilityRequest $request)
+    public function updateData(RestaurantRequest $request)
     {
-            $updateModel = Facility::find($request->id);
-            $image_url = $updateModel->icon;            
-            if($request->file('icon')){
-                $aboutImage = $this->ImageUpload($request);
-                if($aboutImage['status'])
-                {
-                    $image_url = $aboutImage['data'];
-                }
-                else{
-                    $image_url;
-                }
+        
+            $updateModel = Restaurant::find($request->id);
+            $image_url = $updateModel->images;
+            if($request->file('images')){
+                $aboutImage = $this->multipleImage($request);
+                $image_url = array_column($aboutImage, 'data');
+                $updateModel->images = json_encode($image_url);
             }  
             $updateModel->title = $request->title;
             $updateModel->description = $request->description;
-            $updateModel->icon = $image_url;
             $updateModel->status = 1;
             $updateModel->save();
-            $return = $this->returnMessage("Saved successfully.", true);
+            $return = $this->returnMessage("Updated successfully.", true);
         
         return $return;
     }
 
-    public function enableRow(FacilityRequest $request)
+    public function enableRow(RestaurantRequest $request)
     {
-        $check = Facility::where('id', $request->id)->first();
+        $check = Restaurant::where('id', $request->id)->first();
         if ($check) {
             $check->status = 1;
             $check->save();
@@ -121,9 +112,9 @@ class FacilityController extends Controller
         return $return;
     }
 
-    public function disableRow(FacilityRequest $request)
+    public function disableRow(RestaurantRequest $request)
     {
-        $check = Facility::where('id', $request->id)->first();
+        $check = Restaurant::where('id', $request->id)->first();
         if ($check) {
             $check->status = 0;
             $check->save();
@@ -135,11 +126,10 @@ class FacilityController extends Controller
         return $return;
     }
 
-    public function facilityData()
+    public function restaurantData()
     {
-
-        $query = Facility::select(
-            'title' ,'description' ,'icon' ,'status','id'
+        $query = Restaurant::select(
+            'title' ,'description' ,'images' ,'status','id'
         );
         return DataTables::of($query)
             ->addIndexColumn()
@@ -159,34 +149,27 @@ class FacilityController extends Controller
     }
 
 
-    public function getFacility()
+    public function getRestaurant()
     {
-        $facility = Facility::where('status', 1)->paginate(4);
-        $elements = WebSiteElements::where('status','1')->where('element','facility_banner')->value('element_details');
-
+        $restaurant = Restaurant::where('status', 1)->orderBy('updated_at', 'desc')->first();
         $data = [
             'status' => true,
             'success' => true,
-            'facility_banner' => $elements,
-            'facility' => $facility,
+            'restaurant' => $restaurant,
+        ];
+
+        return response()->json($data, 200);
+    }
+    public function restaurantGallery()
+    {
+        $restImages = Gallery::where('category', "restaurant")->get();
+        $data = [
+            'status' => true,
+            'success' => true,
+            'restImages' => $restImages,
         ];
 
         return response()->json($data, 200);
     }
 
-    public function allFacility()
-    {
-        $allFacility = Facility::where('status',1)->get();
-
-         $allFacility->each(function($allFacility) {
-            $allFacility->description = html_entity_decode(strip_tags($allFacility->description));
-        });
-        $data = [
-            'status' => true,
-            'success' => true,
-            'allFacility' => $allFacility,
-        ];
-
-        return response()->json($data, 200);
-    }
 }

@@ -28,6 +28,7 @@ use App\Http\Controllers\SliderController;
 use App\Http\Controllers\FAQController;
 use App\Http\Controllers\EnquiryFormController;
 use App\Http\Controllers\WeddingEnquiryController;
+use App\Http\Controllers\RestaurantController;
 
 
 
@@ -133,4 +134,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
     Route::post('wed-enquiry',[WeddingEnquiryController::class,'store']);
+
+    Route::get('get-restaurant-data',[RestaurantController::class,'getRestaurant']);
+    Route::get('restaurant-gallery',[RestaurantController::class,'restaurantGallery']);
+    
 // });

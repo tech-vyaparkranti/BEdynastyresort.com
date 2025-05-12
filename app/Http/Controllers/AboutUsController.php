@@ -149,6 +149,7 @@ class AboutUsController extends Controller
     public function getAbout()
     {
         $abouts = AboutUs::where('status', 1)->orderBy('updated_at', 'desc')->first();
+        $abouts->description = html_entity_decode(strip_tags($abouts->description));
         $data = [
             'status' => true,
             'success' => true,

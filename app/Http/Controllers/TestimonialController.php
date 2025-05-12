@@ -148,7 +148,12 @@ class TestimonialController extends Controller
 
     public function testimonialData()
     {
-        $testimonials = Testimonial::where('status',1)->get();
+        $testimonials = Testimonial::where('status', 1)->get();
+
+        $testimonials->each(function($testimonial) {
+            $testimonial->description = html_entity_decode(strip_tags($testimonial->description));
+        });
+
         $data = [
             'status' => true,
             'success' => true,
@@ -157,6 +162,7 @@ class TestimonialController extends Controller
 
         return response()->json($data, 200);
     }
+
 
     public function TestimonialDetails($id)
     {
@@ -168,7 +174,6 @@ class TestimonialController extends Controller
                 'success' => true,
                 'testimonial' => $testimonial,
             ];
-    
         }
         else{
             $data = [

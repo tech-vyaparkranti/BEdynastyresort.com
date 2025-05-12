@@ -1,30 +1,21 @@
 @extends('layouts.dashboardLayout')
-@section('title', 'Testimonial')
+@section('title', 'Restaurant')
 @section('content')
 
-    <x-content-div heading="Manage Testimonial">
-        <x-card-element header="Add Testimonial">
+    <x-content-div heading="Manage Restaurant">
+        <x-card-element header="Add Restaurant Data ">
             <x-form-element method="POST" enctype="multipart/form-data" id="submitForm" action="javascript:">
                 <x-input type="hidden" name="id" id="id" value=""></x-input>
                 <x-input type="hidden" name="action" id="action" value="insert"></x-input>
 
-                <x-input-with-label-element id="image" label="Upload Writer Image" name="image" type="file"
-                    accept="image/*" required></x-input-with-label-element>
-
-                <x-text-area-with-label id="content" label="Testimonial Content" name="description"
+                <x-input-with-label-element id="image" label="Upload Multiple Image" name="images[]" type="file"
+                    accept="image/*" required multiple></x-input-with-label-element>
+                <x-input-with-label-element id="title" label="Restaurant title" name="title"
+                    required></x-input-with-label-element>
+                <x-text-area-with-label id="content" label="Restaurant Description" name="description"
                     required></x-text-area-with-label>
-                <x-input-with-label-element id="name" label="Writer name" name="name" type="text"
-                    required></x-input-with-label-element>
-                <x-input-with-label-element id="designation" label="Writer City" name="designation" type="text"
-                    required></x-input-with-label-element>
 
-
-
-                <x-input-with-label-element id="sorting" required label="Testimonial Sorting" type="numeric"
-                    name="sorting"></x-input-with-label-element>
-                <x-input-with-label-element id="review" required label="Testimonial rating" type="numeric"
-                    name="review"></x-input-with-label-element>
-                <x-select-with-label id="status" name="status" label="Select Status" required="true">
+                <x-select-with-label id="blog_status" name="status" label="Select Status" required="true">
                     <option value="1">Live</option>
                     <option value="0">Disabled</option>
                 </x-select-with-label>
@@ -34,7 +25,7 @@
 
         </x-card-element>
 
-        <x-card-element header="Testimonial Data">
+        <x-card-element header="Restaurant Data">
             <x-data-table>
 
             </x-data-table>
@@ -58,7 +49,7 @@
                 serverSide: true,
                 "scrollX": true,
                 ajax: {
-                    url: "{{ route('getTestimonial') }}",
+                    url: "{{ route('restaurantData') }}",
                     type: 'POST',
                     data: {
                         '_token': '{{ csrf_token() }}'
@@ -78,40 +69,46 @@
                         title: 'Action'
                     },
                     {
-                        data: 'image',
+                        data: 'images',
                         render: function(data, type, row) {
-                            let image = '';
+                            let images = '';
+
                             if (data) {
-                                image = '<img alt="Image Link" src="' + data +
-                                    '" class="img-thumbnail">'
+                                try {
+                                    let cleanData = data.replace(/&quot;/g, '"');
+                                    if (!cleanData.startsWith('[') || !cleanData.endsWith(']')) {
+                                        cleanData = `[${cleanData}]`;
+                                    }
+
+                                    let imageArray = JSON.parse(cleanData);
+
+                                    images += '<div style="display: flex; flex-wrap: wrap;">';
+
+                                    imageArray.forEach(function(image) {
+                                        images += '<img class="img-thumbnail" src="' +
+                                            image +
+                                            '" alt="Image" style="width: 100px; margin-right: 5px; height: auto;">';
+                                    });
+                                } catch (e) {
+                                    images = '<span class="text-danger">Invalid image data</span>';
+                                }
                             }
-                            return image;
+
+                            return images;
                         },
                         orderable: false,
                         searchable: false,
-                        title: "Image"
+                        title: "Images",
                     },
-
                     {
-                        data: 'name',
-                        name: 'name',
-                        title: 'Writer Name'
+                        data: 'title',
+                        name: 'title',
+                        title: 'About Title'
                     },
                     {
                         data: 'description',
                         name: 'description',
-                        title: 'Testimonial Content'
-                    },
-
-                    {
-                        data: 'designation',
-                        name: 'designation',
-                        title: 'Writer City'
-                    },
-                    {
-                        data: 'sorting',
-                        name: 'sorting',
-                        title: 'Sorting'
+                        title: 'About Content'
                     },
 
                 ],
@@ -126,11 +123,9 @@
             if (row['id']) {
                 $("#id").val(row['id']);
                 $("#image").attr("required", false);
-                $("#name").val(row['name']);
-                $("#designation").val(row['designation']);
-                $("#review").val(row['review']);
-                $("#status").val(row['status']);
-                $("#sorting").val(row['sorting']);
+                $("#title").val(row['title']);
+               
+                $("#blog_status").val(row['status']);
                 $("#action").val("update");
                 $("#content").val(row['description']);
                 $('#content').summernote('destroy');
@@ -166,7 +161,7 @@
                     if (result.isConfirmed) {
                         $.ajax({
                             type: 'POST',
-                            url: '{{ route('saveTestimonial') }}',
+                            url: '{{ route('saveRestaurant') }}',
                             data: {
                                 id: id,
                                 action: action,
@@ -197,7 +192,7 @@
                 var form = new FormData(this);
                 $.ajax({
                     type: 'POST',
-                    url: '{{ route('saveTestimonial') }}',
+                    url: '{{ route('saveRestaurant') }}',
                     data: form,
                     cache: false,
                     contentType: false,
@@ -209,15 +204,6 @@
                             errorMessage(response.message);
                         }
 
-                    },
-                    error: function(xhr) {
-                        if (xhr.status === 422) {
-                            const errors = xhr.responseJSON.errors;
-                            const allMessages = Object.values(errors).flat().join('<br>');
-                            errorMessage(allMessages);
-                        } else {
-                            errorMessage("Something went wrong");
-                        }
                     },
                     failure: function(response) {
                         errorMessage(response.message);
