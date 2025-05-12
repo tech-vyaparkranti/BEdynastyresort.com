@@ -26,22 +26,43 @@ class WebSiteElementsController extends Controller
         "instagram_link",
         "twitter_link",
         "linkedin_link",
+
         "about_banner_heading",
         "about_banner",
+        "about_banner_description",
+
         "room_banner_heading",
+        "room_banner_description",
         "room_banner",
+
         "event_banner_heading",
         "event_banner",
+        "event_banner_description",
+
         "wedding_banner_heading",
         "wedding_banner",
+        "wedding_banner_description",
+
+
         "satsang_banner_heading",
         "satsang_banner",
+        "satsang_banner_description",
+
         "guest_banner_heading",
         "guest_banner",
+        "guest_banner_description",
+
+
         "gallery_banner_heading",
         "gallery_banner",
+        "gallery_banner_description",
+
+
         "offer_banner_heading",
         "offer_banner",
+        "offer_banner_description",
+
+
         "facility_banner",
         "home_video_link",
         "footer_content",
@@ -271,16 +292,28 @@ class WebSiteElementsController extends Controller
             "gallery_banner",
             "offer_banner_heading",
             "offer_banner",
+
+            "about_banner_description",
+            "room_banner_description",
+            "event_banner_description",
+            "wedding_banner_description",
+            "satsang_banner_description",
+            "guest_banner_description",
+            "gallery_banner_description",
+            "offer_banner_description",
+
         ];
         
         $bannerData = WebSiteElements::where('status', 1)
             ->whereIn('element', $requiredElements)
             ->pluck('element_details', 'element')
             ->toArray();
+        $cleanedBannerData = array_map('strip_tags', $bannerData);
+
             $data = [
                 'status' => true,
                 'success' => true,
-                'bannerData' => $bannerData,
+                'bannerData' => $cleanedBannerData,
             ];
             return response()->json($data, 200);
     }

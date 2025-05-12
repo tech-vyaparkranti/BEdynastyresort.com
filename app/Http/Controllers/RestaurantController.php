@@ -152,6 +152,7 @@ class RestaurantController extends Controller
     public function getRestaurant()
     {
         $restaurant = Restaurant::where('status', 1)->orderBy('updated_at', 'desc')->first();
+        $restaurant->description = html_entity_decode(strip_tags($restaurant->description));
         $data = [
             'status' => true,
             'success' => true,
