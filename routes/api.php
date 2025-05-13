@@ -29,6 +29,7 @@ use App\Http\Controllers\FAQController;
 use App\Http\Controllers\EnquiryFormController;
 use App\Http\Controllers\WeddingEnquiryController;
 use App\Http\Controllers\RestaurantController;
+use App\Http\Controllers\AwardsController;
 
 
 
@@ -137,5 +138,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
     Route::get('get-restaurant-data',[RestaurantController::class,'getRestaurant']);
     Route::get('restaurant-gallery',[RestaurantController::class,'restaurantGallery']);
+
+    Route::get('award-data',[AwardsController::class,'awardsData']);
+
+
     
 // });

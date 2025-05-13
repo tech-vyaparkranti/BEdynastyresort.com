@@ -234,6 +234,12 @@
                     <div data-i18n="Analytics">Manage Restaurant</div>
                 </a>
             </li>
+            <li class="menu-item">
+                <a href="{{ route('viewAward') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-heart"></i>
+                    <div data-i18n="Analytics">Manage Awards</div>
+                </a>
+            </li>
             
        
     </ul>

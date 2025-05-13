@@ -37,6 +37,7 @@ use App\Http\Controllers\BussConfrenceController;
 use App\Http\Controllers\FAQController;
 use App\Http\Controllers\WeddingEnquiryController;
 use App\Http\Controllers\RestaurantController;
+use App\Http\Controllers\AwardsController;
 
 
 
@@ -162,6 +163,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get("view-restaurant", [RestaurantController::class, "viewRestaurant"])->name("viewRestaurant");
     Route::post("save-restaurant-info", [RestaurantController::class, "saveRestaurant"])->name("saveRestaurant");
     Route::post("get-restaurant-info", [RestaurantController::class, "restaurantData"])->name("restaurantData");
+
+    
+    Route::get("view-award", [AwardsController::class, "viewAward"])->name("viewAward");
+    Route::post("save-award", [AwardsController::class, "saveAward"])->name("saveAward");
+    Route::post("get-award-data", [AwardsController::class, "getAward"])->name("getAward");
 
 });
 
