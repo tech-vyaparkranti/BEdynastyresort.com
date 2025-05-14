@@ -30,6 +30,7 @@ use App\Http\Controllers\EnquiryFormController;
 use App\Http\Controllers\WeddingEnquiryController;
 use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\AwardsController;
+use App\Http\Controllers\CheckInController;
 
 
 
@@ -141,6 +142,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
     Route::get('award-data',[AwardsController::class,'awardsData']);
 
+    Route::post('checkin-store',[CheckInController::class,'store']);
 
     
 // });

@@ -240,6 +240,12 @@
                     <div data-i18n="Analytics">Manage Awards</div>
                 </a>
             </li>
+            <li class="menu-item">
+                <a href="{{ route('checkInPage') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-heart"></i>
+                    <div data-i18n="Analytics">Manage CheckIn Data</div>
+                </a>
+            </li>
             
        
     </ul>

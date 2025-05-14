@@ -38,6 +38,7 @@ use App\Http\Controllers\FAQController;
 use App\Http\Controllers\WeddingEnquiryController;
 use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\AwardsController;
+use App\Http\Controllers\CheckInController;
 
 
 
@@ -168,6 +169,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get("view-award", [AwardsController::class, "viewAward"])->name("viewAward");
     Route::post("save-award", [AwardsController::class, "saveAward"])->name("saveAward");
     Route::post("get-award-data", [AwardsController::class, "getAward"])->name("getAward");
+
+    Route::get("view-checkin", [CheckInController::class, "checkInPage"])->name("checkInPage");
+    Route::post("get-checkIn-data", [CheckInController::class, "checkInDataTable"])->name("checkInDataTable");
 
 });
 
