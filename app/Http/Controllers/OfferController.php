@@ -107,6 +107,7 @@ class OfferController extends Controller
                     $features[] = $value;
                 }
             }
+            $updateModel->title = $request->title;
             $updateModel->status = $request->status;
             $updateModel->features = json_encode($features);
             $updateModel->status = $request->status;
