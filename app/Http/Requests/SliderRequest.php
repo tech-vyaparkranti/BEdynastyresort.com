@@ -35,7 +35,6 @@ class SliderRequest extends FormRequest
             "id"=>"bail|required_if:action,update,enable,disable|nullable|exists:control_sliders,id",
             "action"=>"bail|required|in:insert,update,enable,disable",
             "heading_top"=>"bail|nullable|string|max:500",
-            "heading_middle"=>"bail|nullable|string|max:500",
             "heading_bottom"=>"bail|nullable|string|max:500",
             "image"=>"bail|image|required_if:action,insert|dimensions:ratio=16/9",
             "slide_status"=>"required_if:action,update|in:live,disabled",

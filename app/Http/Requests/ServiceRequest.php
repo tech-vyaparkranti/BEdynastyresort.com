@@ -6,6 +6,7 @@ use App\Traits\ResponseAPI;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Validation\Rule;
 
 class ServiceRequest extends FormRequest
 {
@@ -27,7 +28,14 @@ class ServiceRequest extends FormRequest
     {
         return [
             'id'=>"bail|required_if:action,update,enable,disable|nullable|exists:services,id",
-            'title'=>"bail|required_if:action,update,insert|nullable|string|max:500|unique:services,title,",
+            'title' => [
+                'bail',
+                'required_if:action,update,insert',
+                'nullable',
+                'string',
+                'max:500',
+                Rule::unique('services', 'title')->ignore($this->id),
+            ], 
             'image'=>"bail|required_if:action,insert|nullable|image",
             'description'=>"bail|required_if:action,update,insert|nullable",
             "action"=>"bail|required|in:insert,update,enable,disable",

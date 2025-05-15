@@ -198,10 +198,7 @@ class RoomController extends Controller
     {
         $rooms = Room::where('status',1)->get();
         $rooms->each(function($rooms) {
-            $rooms->amenities = html_entity_decode(strip_tags($rooms->amenities));
-            $rooms->features = html_entity_decode(strip_tags($rooms->features));
             $rooms->details = html_entity_decode(strip_tags($rooms->details));
-
         });
         $data = [
             'status' => true,
@@ -215,8 +212,6 @@ class RoomController extends Controller
     {
         $singleRoom = Room::where('slug',$slug)->first();
 
-        $singleRoom->amenities = html_entity_decode(strip_tags($singleRoom->amenities));
-        $singleRoom->features = html_entity_decode(strip_tags($singleRoom->features));
         $singleRoom->details = html_entity_decode(strip_tags($singleRoom->details));
 
         $data = [
